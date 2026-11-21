@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+
+[node name="LivingRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+room_id = "living_room"
+name_key = "ROOM_LIVING"
+wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
+floor_color = Color(0.8, 0.66, 0.52, 1)
+
+
+[node name="DoorKitchen" type="Control" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 380.0
+offset_right = 160.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "living_to_kitchen"
+label_key = "LBL_TO_KITCHEN"
+fill_color = Color(0.9, 0.78, 0.62, 1)
+shape = 2
+label_size = 24
+
+[node name="Clock" type="Control" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 240.0
+offset_right = 520.0
+offset_bottom = 600.0
+script = ExtResource("2")
+hotspot_id = "living_clock"
+label_key = "LBL_CLOCK"
+fill_color = Color(0.62, 0.42, 0.28, 1)
+
+[node name="Calendar" type="Control" parent="."]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 260.0
+offset_right = 880.0
+offset_bottom = 500.0
+script = ExtResource("2")
+hotspot_id = "living_calendar"
+label_key = "LBL_CALENDAR"
+fill_color = Color(1, 1, 1, 1)
+
+[node name="Photo" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 260.0
+offset_right = 1240.0
+offset_bottom = 440.0
+script = ExtResource("2")
+hotspot_id = "living_photo"
+label_key = "LBL_PHOTO"
+fill_color = Color(0.95, 0.85, 0.75, 1)
+
+[node name="Sofa" type="Control" parent="."]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 580.0
+offset_right = 1500.0
+offset_bottom = 860.0
+script = ExtResource("2")
+hotspot_id = "living_sofa"
+label_key = "LBL_SOFA"
+fill_color = Color(0.85, 0.55, 0.55, 1)
+
+[node name="DoorKids" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1700.0
+offset_top = 330.0
+offset_right = 1880.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "living_to_kids"
+label_key = "LBL_TO_KIDS"
+fill_color = Color(0.95, 0.8, 0.85, 1)
+shape = 2
+label_size = 24
+
+[node name="Moko" type="Control" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 660.0
+offset_right = 620.0
+offset_bottom = 980.0
+script = ExtResource("3")

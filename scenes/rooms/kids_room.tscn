@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+
+[node name="KidsRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+room_id = "kids_room"
+name_key = "ROOM_KIDS"
+wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
+floor_color = Color(0.88, 0.78, 0.62, 1)
+
+
+[node name="DoorLiving" type="Control" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 380.0
+offset_right = 160.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "kids_to_living"
+label_key = "LBL_TO_LIVING"
+fill_color = Color(0.9, 0.78, 0.62, 1)
+shape = 2
+label_size = 24
+
+[node name="Shelf" type="Control" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 700.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "kids_shelf"
+label_key = "LBL_SHELF"
+fill_color = Color(0.7, 0.5, 0.34, 1)
+
+[node name="Poster" type="Control" parent="."]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 220.0
+offset_right = 1160.0
+offset_bottom = 500.0
+script = ExtResource("2")
+hotspot_id = "kids_poster"
+label_key = "LBL_POSTER"
+fill_color = Color(0.98, 0.96, 0.85, 1)
+
+[node name="Window" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 220.0
+offset_right = 1620.0
+offset_bottom = 560.0
+script = ExtResource("2")
+hotspot_id = "kids_window"
+label_key = "LBL_FOGGY_WINDOW"
+fill_color = Color(0.86, 0.9, 0.92, 1)
+
+[node name="Bed" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 640.0
+offset_right = 1800.0
+offset_bottom = 900.0
+script = ExtResource("2")
+hotspot_id = "kids_bed"
+label_key = "LBL_BED"
+fill_color = Color(0.75, 0.85, 0.7, 1)
+
+[node name="Moko" type="Control" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 700.0
+offset_right = 1000.0
+offset_bottom = 980.0
+script = ExtResource("3")
