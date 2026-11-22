@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- ひつじのおるすばん / 台所(第2章「ながい夕方」: tools/gen_ch2_art.py で生成)  絵柄お試し版
+       線: 太めの手描き風(ゆらぎフィルタ)  塗り: 水彩風(にじみ+紙の質感)
+       クリック位置(scenes/rooms/kitchen.tscn)と物の位置をそろえてある -->
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="8" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.3" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.35 1.05" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.25  0 0 0 0.16 0"/>
+    </filter>
+    <filter id="blotch" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="3" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0 0.45  0 0 0 0.22 -0.06"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <pattern id="wallpaper" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#FBF0DC"/>
+      <rect x="0" width="8" height="120" fill="#F6DCD6" opacity="0.7"/>
+      <g fill="#F2BFC4" opacity="0.75">
+        <circle cx="60" cy="30" r="5"/><circle cx="66" cy="38" r="5"/><circle cx="54" cy="38" r="5"/>
+        <circle cx="57" cy="46" r="5"/><circle cx="64" cy="46" r="5"/>
+      </g>
+      <circle cx="60" cy="40" r="3" fill="#F7DD8A"/>
+      <g fill="#C9DDB0" opacity="0.8"><circle cx="30" cy="95" r="3"/><circle cx="90" cy="95" r="3"/></g>
+    </pattern>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A8D4EE"/><stop offset="1" stop-color="#E4F2F7"/>
+    </linearGradient>
+    <clipPath id="glass"><rect x="160" y="280" width="320" height="280"/></clipPath>
+    <radialGradient id="sunlight" cx="0.2" cy="0.35" r="0.55">
+      <stop offset="0" stop-color="#FFF6D8" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF6D8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== 壁と床 ===== -->
+  <g filter="url(#wc)">
+    <rect x="-20" y="-20" width="1960" height="680" fill="url(#wallpaper)"/>
+    <rect x="-20" y="640" width="1960" height="150" fill="#DCE7C6"/>
+    <rect x="-20" y="780" width="1960" height="320" fill="#D9B48A"/>
+    <ellipse cx="380" cy="960" rx="230" ry="62" fill="#F3C9C9"/>
+    <ellipse cx="380" cy="960" rx="180" ry="44" fill="#F8DEDA"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-linecap="round" fill="none">
+    <g stroke-width="3" opacity="0.5">
+      <line x1="40" y1="650" x2="40" y2="778"/><line x1="120" y1="650" x2="120" y2="778"/>
+      <line x1="560" y1="650" x2="560" y2="778"/><line x1="940" y1="650" x2="940" y2="700"/>
+      <line x1="1450" y1="650" x2="1450" y2="778"/><line x1="1760" y1="650" x2="1760" y2="778"/>
+    </g>
+    <path d="M-10 640 H1930" stroke-width="5"/>
+    <path d="M-10 780 H1930" stroke-width="6"/>
+    <g stroke-width="3" opacity="0.45">
+      <path d="M-10 830 H1930"/><path d="M-10 895 H1930"/><path d="M-10 975 H1930"/>
+      <path d="M300 780 L270 830"/><path d="M820 830 L800 895"/><path d="M1500 895 L1480 975"/>
+      <path d="M1100 975 L1080 1080"/><path d="M640 780 L630 830"/>
+    </g>
+    <ellipse cx="380" cy="960" rx="230" ry="62" stroke-width="4"/>
+  </g>
+
+  <!-- ===== ペンダントライト ===== -->
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round">
+    <line x1="1160" y1="-10" x2="1160" y2="110"/>
+    <path d="M1100 160 Q1160 92 1220 160 Z" fill="#F5D37A"/>
+  </g>
+  <ellipse cx="1160" cy="190" rx="90" ry="34" fill="#FFF2C2" opacity="0.5" filter="url(#soft)"/>
+
+  <!-- ===== 窓 (140,260)-(500,580) ===== -->
+  <g filter="url(#wc)" clip-path="url(#glass)">
+    <rect x="160" y="280" width="320" height="280" fill="url(#sky)"/>
+    <ellipse cx="330" cy="600" rx="260" ry="120" fill="#A9CF8C"/>
+    <ellipse cx="200" cy="610" rx="160" ry="110" fill="#8FC07A"/>
+    <g fill="#FFFFFF" opacity="0.9">
+      <ellipse cx="250" cy="340" rx="44" ry="18"/><ellipse cx="282" cy="330" rx="30" ry="18"/>
+      <ellipse cx="410" cy="380" rx="34" ry="13"/>
+    </g>
+    <circle cx="430" cy="320" r="24" fill="#FFE08A"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round">
+    <rect x="150" y="270" width="340" height="300" fill="none" stroke-width="16" stroke="#F6EBDD"/>
+    <rect x="142" y="262" width="356" height="316" fill="none"/>
+    <rect x="160" y="280" width="320" height="280" fill="none"/>
+    <line x1="320" y1="280" x2="320" y2="560"/><line x1="160" y1="420" x2="480" y2="420"/>
+    <rect x="120" y="572" width="400" height="26" rx="6" fill="#E9D3B6"/>
+    <circle cx="200" cy="560" r="16" fill="#E88C7D"/><path d="M200 544 q6 -18 18 -14" fill="none"/>
+    <path d="M110 240 Q150 420 120 600 L170 600 Q200 420 175 240 Z" fill="#F4BFC3"/>
+    <path d="M530 240 Q490 420 520 600 L470 600 Q440 420 465 240 Z" fill="#F4BFC3"/>
+    <line x1="90" y1="242" x2="550" y2="242" stroke-width="7"/>
+  </g>
+  <rect x="160" y="280" width="320" height="280" fill="url(#sunlight)"/>
+
+  <!-- ===== れいぞうこ (600,240)-(860,780) と メモ (640,330)-(820,450) ===== -->
+  <g filter="url(#wc)">
+    <rect x="604" y="244" width="252" height="532" rx="40" fill="#E6F0E2"/>
+    <rect x="618" y="258" width="60" height="500" rx="24" fill="#F6FAF3" opacity="0.8"/>
+    <rect x="650" y="336" width="166" height="108" fill="#FCEB9C"/>
+    <rect x="700" y="490" width="110" height="90" fill="#FFFFFF"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="604" y="244" width="252" height="532" rx="40"/>
+    <line x1="604" y1="470" x2="856" y2="470"/>
+    <rect x="626" y="380" width="14" height="70" rx="7" fill="#C9D3CC"/>
+    <rect x="626" y="500" width="14" height="90" rx="7" fill="#C9D3CC"/>
+    <rect x="620" y="776" width="40" height="10" fill="#5A4636"/><rect x="800" y="776" width="40" height="10" fill="#5A4636"/>
+    <!-- メモ -->
+    <path d="M650 336 L816 340 L812 444 L654 440 Z" fill="none"/>
+    <circle cx="733" cy="336" r="10" fill="#E8848A"/>
+    <g stroke-width="3" opacity="0.7">
+      <path d="M672 370 h110"/><path d="M672 392 h124"/><path d="M672 414 h80"/>
+    </g>
+    <!-- 子どもの絵(クレヨンの家とひつじ: ミナの気配) -->
+    <rect x="700" y="490" width="110" height="90" stroke-width="4"/>
+    <circle cx="755" cy="488" r="8" fill="#8FC07A"/>
+    <path d="M718 560 l22 -28 l22 28 Z" stroke="#E8848A" stroke-width="4"/>
+    <circle cx="785" cy="555" r="11" stroke="#7A8FB0" stroke-width="4"/>
+    <circle cx="796" cy="550" r="8" stroke="#7A8FB0" stroke-width="4"/>
+  </g>
+
+  <!-- ===== しょっきだな (1000,200)-(1380,640) ===== -->
+  <g filter="url(#wc)">
+    <rect x="1004" y="204" width="372" height="432" rx="14" fill="#C8956A"/>
+    <rect x="1030" y="236" width="150" height="190" fill="#F4E7D3"/>
+    <rect x="1200" y="236" width="150" height="190" fill="#F4E7D3"/>
+    <rect x="1030" y="470" width="150" height="140" fill="#B7845B"/>
+    <rect x="1200" y="470" width="150" height="140" fill="#B7845B"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <path d="M990 204 H1390 L1376 180 H1004 Z" fill="#B7845B"/>
+    <rect x="1004" y="204" width="372" height="432" rx="14"/>
+    <rect x="1030" y="236" width="150" height="190"/><rect x="1200" y="236" width="150" height="190"/>
+    <line x1="1030" y1="330" x2="1180" y2="330" stroke-width="4"/><line x1="1200" y1="330" x2="1350" y2="330" stroke-width="4"/>
+    <!-- 4枚のおさら(家族の色) -->
+    <ellipse cx="1072" cy="306" rx="34" ry="22" fill="#FFFFFF"/><circle cx="1072" cy="306" r="9" fill="#7A9CC6" stroke="none"/>
+    <ellipse cx="1140" cy="306" rx="34" ry="22" fill="#FFFFFF"/><circle cx="1140" cy="306" r="9" fill="#E8848A" stroke="none"/>
+    <ellipse cx="1240" cy="306" rx="34" ry="22" fill="#FFFFFF"/><circle cx="1240" cy="306" r="9" fill="#9CC47F" stroke="none"/>
+    <ellipse cx="1308" cy="306" rx="34" ry="22" fill="#FFFFFF"/><circle cx="1308" cy="306" r="9" fill="#F2C55C" stroke="none"/>
+    <!-- コップとびん -->
+    <rect x="1050" y="370" width="30" height="46" rx="6" fill="#DCEEF2"/><rect x="1094" y="362" width="30" height="54" rx="6" fill="#DCEEF2"/>
+    <path d="M1230 416 v-40 q0 -14 14 -14 h12 q14 0 14 14 v40 Z" fill="#F7D9A0"/>
+    <path d="M1290 416 v-30 q0 -12 12 -12 h16 q12 0 12 12 v30 Z" fill="#F4BFC3"/>
+    <line x1="1004" y1="448" x2="1376" y2="448" stroke-width="6"/>
+    <rect x="1030" y="470" width="150" height="140"/><rect x="1200" y="470" width="150" height="140"/>
+    <circle cx="1162" cy="540" r="8" fill="#5A4636"/><circle cx="1218" cy="540" r="8" fill="#5A4636"/>
+  </g>
+
+  <!-- ===== コンロ (1460,460)-(1740,780) ===== -->
+  <g filter="url(#wc)">
+    <rect x="1464" y="476" width="272" height="300" rx="16" fill="#AEBBC4"/>
+    <rect x="1494" y="580" width="212" height="150" rx="12" fill="#97A6B0"/>
+    <path d="M1520 470 q0 -56 50 -56 q50 0 50 56 Z" fill="#E8848A"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="1464" y="476" width="272" height="300" rx="16"/>
+    <rect x="1456" y="462" width="288" height="22" rx="8" fill="#C7D1D8"/>
+    <rect x="1494" y="580" width="212" height="150" rx="12"/>
+    <line x1="1520" y1="600" x2="1680" y2="600" stroke-width="7"/>
+    <circle cx="1510" cy="530" r="12" fill="#5A4636"/><circle cx="1600" cy="530" r="12" fill="#5A4636"/><circle cx="1690" cy="530" r="12" fill="#5A4636"/>
+    <!-- やかん -->
+    <path d="M1520 470 q0 -56 50 -56 q50 0 50 56 Z"/>
+    <path d="M1550 414 q20 -26 40 0"/>
+    <path d="M1620 450 l38 -26"/>
+    <path d="M1490 790 v-14 M1710 790 v-14" stroke-width="10"/>
+  </g>
+
+  <!-- ===== テーブルといす (880,700)-(1440,900) ===== -->
+  <g filter="url(#wc)">
+    <g fill="#E5C49C">
+      <rect x="906" y="606" width="60" height="110" rx="16"/>
+      <rect x="1018" y="606" width="60" height="110" rx="16"/>
+      <rect x="1130" y="606" width="60" height="110" rx="16"/>
+      <rect x="1242" y="606" width="60" height="110" rx="16"/>
+      <rect x="1354" y="606" width="60" height="110" rx="16"/>
+    </g>
+    <rect x="872" y="700" width="576" height="56" rx="10" fill="#B98258"/>
+    <path d="M884 756 H1436 L1420 812 Q1160 836 900 812 Z" fill="#F6D8D6"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="906" y="606" width="60" height="110" rx="16"/><line x1="922" y1="630" x2="950" y2="630" stroke-width="3"/>
+    <rect x="1018" y="606" width="60" height="110" rx="16"/><line x1="1034" y1="630" x2="1062" y2="630" stroke-width="3"/>
+    <rect x="1130" y="606" width="60" height="110" rx="16"/><line x1="1146" y1="630" x2="1174" y2="630" stroke-width="3"/>
+    <rect x="1242" y="606" width="60" height="110" rx="16"/>
+    <rect x="1354" y="606" width="60" height="110" rx="16"/><line x1="1370" y1="630" x2="1398" y2="630" stroke-width="3"/>
+    <!-- 4つめの椅子だけ、花のクッション(だれの席?) -->
+    <g transform="translate(1272 650)">
+      <circle cx="0" cy="-16" r="13" fill="#F4A9B4"/><circle cx="15" cy="-4" r="13" fill="#F4A9B4"/>
+      <circle cx="9" cy="14" r="13" fill="#F4A9B4"/><circle cx="-9" cy="14" r="13" fill="#F4A9B4"/>
+      <circle cx="-15" cy="-4" r="13" fill="#F4A9B4"/><circle cx="0" cy="0" r="9" fill="#F7DD8A"/>
+    </g>
+    <rect x="872" y="700" width="576" height="56" rx="10"/>
+    <path d="M884 756 H1436 L1420 812 Q1160 836 900 812 Z"/>
+    <g stroke-width="3" opacity="0.5"><path d="M960 760 v56"/><path d="M1060 760 v62"/><path d="M1160 760 v64"/><path d="M1260 760 v62"/><path d="M1360 760 v56"/></g>
+    <path d="M920 812 L912 900" stroke-width="12"/><path d="M1400 812 L1408 900" stroke-width="12"/>
+    <path d="M1010 826 L1006 880" stroke-width="10" opacity="0.6"/><path d="M1310 826 L1314 880" stroke-width="10" opacity="0.6"/>
+    <!-- テーブルの上: 花びん -->
+    <path d="M1140 700 q-14 -30 4 -50 h32 q18 20 4 50 Z" fill="#DCEEF2"/>
+    <path d="M1160 650 q-8 -40 -30 -56 M1160 650 q4 -44 26 -60" stroke="#7FA86A" stroke-width="4"/>
+    <circle cx="1128" cy="590" r="12" fill="#F7DD8A"/><circle cx="1188" cy="586" r="12" fill="#F4A9B4"/>
+  </g>
+
+  <!-- ===== ドア (1770,380)-(1910,780) ===== -->
+  <g filter="url(#wc)">
+    <path d="M1776 776 V450 Q1776 386 1840 386 Q1904 386 1904 450 V776 Z" fill="#E8C9A0"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" fill="none">
+    <path d="M1776 776 V450 Q1776 386 1840 386 Q1904 386 1904 450 V776 Z"/>
+    <rect x="1800" y="470" width="80" height="120" rx="12" stroke-width="3"/>
+    <rect x="1800" y="620" width="80" height="120" rx="12" stroke-width="3"/>
+    <circle cx="1880" cy="610" r="9" fill="#5A4636"/>
+  </g>
+
+  <!-- 窓の外も夕焼けに -->
+  <g clip-path="url(#glass)" filter="url(#wc)">
+    <rect x="160" y="280" width="320" height="280" fill="#F4A47C" opacity="0.82"/>
+    <circle cx="420" cy="470" r="26" fill="#F06A3C" opacity="0.85"/>
+  </g>
+  <!-- ===== 第2章: 夕焼けの光 ===== -->
+  <defs>
+    <linearGradient id="ch2_evening" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F59A62" stop-opacity="0.34"/>
+      <stop offset="0.6" stop-color="#E9877A" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7E5E96" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#ch2_evening)" style="mix-blend-mode:multiply"/>
+
+  <!-- ===== 紙の質感 ===== -->
+  <rect width="1920" height="1080" filter="url(#blotch)"/>
+  <rect width="1920" height="1080" filter="url(#paper)"/>
+</svg>

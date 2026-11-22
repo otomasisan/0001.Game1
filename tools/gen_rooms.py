@@ -12,7 +12,7 @@ ROOMS = {
         "name_key": "ROOM_KITCHEN",
         "floor": "Color(0.86, 0.72, 0.55, 1)",
         "moko": (200, 640, 520, 960),
-        "backgrounds": ["res://assets/rooms/kitchen_ch1.png"],
+        "backgrounds": ["res://assets/rooms/kitchen_ch1.png", "res://assets/rooms/kitchen_ch2.png"],
         "spots": [
             ("Window", "kitchen_window", "LBL_WINDOW", (140, 260, 500, 580), "Color(0.72, 0.87, 0.96, 1)", "rect"),
             ("Fridge", "", "", (600, 240, 860, 780), "Color(0.95, 0.95, 0.93, 1)", "rect"),
@@ -27,13 +27,16 @@ ROOMS = {
         "name_key": "ROOM_LIVING",
         "floor": "Color(0.8, 0.66, 0.52, 1)",
         "moko": (300, 660, 620, 980),
-        "backgrounds": ["res://assets/rooms/living_room_ch1.png"],
+        "backgrounds": ["res://assets/rooms/living_room_ch1.png", "res://assets/rooms/living_room_ch2.png"],
         "spots": [
             ("DoorKitchen", "living_to_kitchen", "LBL_TO_KITCHEN", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Clock", "living_clock", "LBL_CLOCK", (260, 240, 520, 600), "Color(0.62, 0.42, 0.28, 1)", "rect"),
             ("Calendar", "living_calendar", "LBL_CALENDAR", (640, 260, 880, 500), "Color(1, 1, 1, 1)", "rect"),
             ("Photo", "living_photo", "LBL_PHOTO", (1000, 260, 1240, 440), "Color(0.95, 0.85, 0.75, 1)", "rect"),
             ("Sofa", "living_sofa", "LBL_SOFA", (900, 580, 1500, 860), "Color(0.85, 0.55, 0.55, 1)", "rect"),
+            ("Radio", "living_radio", "LBL_RADIO", (1290, 380, 1470, 480), "Color(0.85, 0.66, 0.49, 1)", "rect"),
+            ("Box", "living_box", "LBL_BOX", (1210, 640, 1340, 740), "Color(0.79, 0.6, 0.42, 1)", "rect", "chapter>=2"),
+            ("DoorBrother", "living_to_brother", "LBL_TO_BROTHER", (1520, 400, 1670, 780), "Color(0.69, 0.76, 0.87, 1)", "door"),
             ("DoorKids", "living_to_kids", "LBL_TO_KIDS", (1700, 330, 1880, 780), "Color(0.95, 0.8, 0.85, 1)", "door"),
         ],
     },
@@ -41,7 +44,7 @@ ROOMS = {
         "name_key": "ROOM_KIDS",
         "floor": "Color(0.88, 0.78, 0.62, 1)",
         "moko": (700, 700, 1000, 980),
-        "backgrounds": ["res://assets/rooms/kids_room_ch1.png"],
+        "backgrounds": ["res://assets/rooms/kids_room_ch1.png", "res://assets/rooms/kids_room_ch2.png"],
         "spots": [
             ("DoorLiving", "kids_to_living", "LBL_TO_LIVING", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Shelf", "kids_shelf", "LBL_SHELF", (300, 250, 700, 780), "Color(0.7, 0.5, 0.34, 1)", "rect"),
@@ -119,7 +122,9 @@ def build(room_id, d):
         "",
     ]
     text = "\n".join(out) + "\n"
-    for name, hid, label, (l, t, r, b), color, shape in d["spots"]:
+    for spot in d["spots"]:
+        name, hid, label, (l, t, r, b), color, shape = spot[:6]
+        visible_if = spot[6] if len(spot) > 6 else ""
         extra = ['script = ExtResource("2")']
         if hid:
             extra.append(f'hotspot_id = "{hid}"')
@@ -130,6 +135,8 @@ def build(room_id, d):
             extra.append(f"shape = {SHAPE[shape]}")
         if shape == "door":
             extra.append("label_size = 24")
+        if visible_if:
+            extra.append(f'visible_if = "{visible_if}"')
         text += "\n" + node(name, l, t, r, b, extra)
     l, t, r, b = d["moko"]
     text += "\n" + node("Moko", l, t, r, b, ['script = ExtResource("3")', 'texture = ExtResource("4")'])

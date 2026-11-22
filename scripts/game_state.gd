@@ -69,6 +69,21 @@ func new_game() -> void:
 	inventory_changed.emit()
 
 
+## 確認用: 第1章を解き終えた状態から第2章を始める(デバッグ版のタイトルから呼ぶ)
+const CHAPTER1_FLAGS := ["intro_done", "read_memo", "got_plates", "solved_plates", "clock_wound",
+	"solved_clock", "kids_door_open", "solved_books", "chapter1_clear"]
+
+
+func debug_start_chapter(n: int) -> void:
+	new_game()
+	if n >= 2:
+		for f in CHAPTER1_FLAGS:
+			flags[f] = true
+		room = "kids_room"
+	chapter = n
+	changed.emit()
+
+
 func set_flag(flag: String, value: bool = true) -> void:
 	flags[flag] = value
 	changed.emit()

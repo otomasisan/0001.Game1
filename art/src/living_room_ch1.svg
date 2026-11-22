@@ -184,12 +184,35 @@
     <path d="M950 830 v28 M1450 830 v28" stroke-width="12"/>
   </g>
 
-  <!-- ===== スタンドライト ===== -->
-  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M1590 780 v-290" fill="none"/><ellipse cx="1590" cy="782" rx="36" ry="10" fill="#9C6B47"/>
-    <path d="M1544 496 L1564 420 H1616 L1636 496 Z" fill="#F7E2A6"/>
+  <!-- ===== ラジオの たな (1290,380)-(1470,480) ===== -->
+  <g filter="url(#wc)">
+    <rect x="1304" y="386" width="152" height="82" rx="14" fill="#D9A97C"/>
+    <rect x="1318" y="400" width="70" height="54" rx="8" fill="#F3E2C6"/>
   </g>
-  <ellipse cx="1590" cy="470" rx="90" ry="60" fill="#FFF2C2" opacity="0.35" filter="url(#soft)"/>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="1284" y="468" width="192" height="16" rx="4" fill="#B98258"/>
+    <path d="M1300 484 l14 22 M1460 484 l-14 22" stroke-width="4"/>
+    <rect x="1304" y="386" width="152" height="82" rx="14"/>
+    <rect x="1318" y="400" width="70" height="54" rx="8"/>
+    <g stroke-width="3" opacity="0.7"><path d="M1326 414 h54"/><path d="M1326 426 h54"/><path d="M1326 438 h54"/></g>
+    <!-- 周波数の目盛りと、つまみの とれた あな -->
+    <rect x="1398" y="400" width="46" height="20" rx="4" fill="#FFF8E8" stroke-width="3"/>
+    <path d="M1404 410 h34" stroke-width="2"/>
+    <circle cx="1420" cy="444" r="9" fill="#5A4636"/>
+    <path d="M1330 386 l-16 -40" stroke-width="3"/><circle cx="1312" cy="342" r="5" fill="#5A4636"/>
+  </g>
+
+  <!-- ===== ラムの へやの ドア (1520,400)-(1670,780) ===== -->
+  <g filter="url(#wc)"><path d="M1526 776 V466 Q1526 404 1595 404 Q1664 404 1664 466 V776 Z" fill="#AFC3DD"/></g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <path d="M1526 776 V466 Q1526 404 1595 404 Q1664 404 1664 466 V776 Z"/>
+    <rect x="1548" y="486" width="94" height="120" rx="12" stroke-width="3"/>
+    <rect x="1548" y="632" width="94" height="120" rx="12" stroke-width="3"/>
+    <circle cx="1650" cy="618" r="9" fill="#5A4636"/>
+    <!-- たこの シール -->
+    <path d="M1595 430 l18 18 l-18 22 l-18 -22 Z" fill="#F7DD8A" stroke-width="3"/>
+    <path d="M1595 470 q-6 8 0 14" stroke-width="2"/>
+  </g>
 
   <!-- ===== こどもべやの ドア (1700,330)-(1880,780) ===== -->
   <g filter="url(#wc)"><path d="M1706 776 V414 Q1706 336 1790 336 Q1874 336 1874 414 V776 Z" fill="#F2C9D0"/></g>

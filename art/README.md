@@ -45,4 +45,16 @@ node tools/render_svg.js art/src/poppo.svg assets/characters/poppo.png
 ## 章ごとの差分
 
 部屋シーンの `backgrounds` に章の順で絵を並べます(1章=通常、2章=異変、3章=真実…)。
-絵がない章は仮の塗りで表示されます。今は3部屋とも1章の絵だけです。
+絵がない章は仮の塗りで表示されます。
+
+2章(ながい夕方)の絵は、1章の絵に夕焼けの色を重ねて作ります。`tools/gen_ch2_art.py` が
+`*_ch1.svg` から `*_ch2.svg` を作るので、1章の絵を直したら次を実行してください。
+
+```
+python3 tools/gen_ch2_art.py
+for r in kitchen living_room kids_room; do node tools/render_svg.js art/src/${r}_ch2.svg assets/rooms/${r}_ch2.png; done
+```
+
+- 台所・子ども部屋: 窓の外が夕焼けに、部屋全体に夕方の色
+- 居間: 夕方の色に加えて、つるが伸び、ソファにダイヤルの小箱(謎4)が現れる
+- ラムの部屋は2章から入れるので、2章の絵だけ(`brother_room_ch2.svg`)

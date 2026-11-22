@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
 [ext_resource type="Texture2D" path="res://assets/characters/moko.png" id="4"]
 [ext_resource type="Texture2D" path="res://assets/rooms/living_room_ch1.png" id="bg1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/living_room_ch2.png" id="bg2"]
 
 [node name="LivingRoom" type="Control"]
 layout_mode = 3
@@ -18,7 +19,7 @@ room_id = "living_room"
 name_key = "ROOM_LIVING"
 wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
 floor_color = Color(0.8, 0.66, 0.52, 1)
-backgrounds = Array[Texture2D]([ExtResource("bg1")])
+backgrounds = Array[Texture2D]([ExtResource("bg1"), ExtResource("bg2")])
 
 
 [node name="DoorKitchen" type="Control" parent="."]
@@ -77,6 +78,42 @@ script = ExtResource("2")
 hotspot_id = "living_sofa"
 label_key = "LBL_SOFA"
 fill_color = Color(0.85, 0.55, 0.55, 1)
+
+[node name="Radio" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1290.0
+offset_top = 380.0
+offset_right = 1470.0
+offset_bottom = 480.0
+script = ExtResource("2")
+hotspot_id = "living_radio"
+label_key = "LBL_RADIO"
+fill_color = Color(0.85, 0.66, 0.49, 1)
+
+[node name="Box" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1210.0
+offset_top = 640.0
+offset_right = 1340.0
+offset_bottom = 740.0
+script = ExtResource("2")
+hotspot_id = "living_box"
+label_key = "LBL_BOX"
+fill_color = Color(0.79, 0.6, 0.42, 1)
+visible_if = "chapter>=2"
+
+[node name="DoorBrother" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1520.0
+offset_top = 400.0
+offset_right = 1670.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "living_to_brother"
+label_key = "LBL_TO_BROTHER"
+fill_color = Color(0.69, 0.76, 0.87, 1)
+shape = 2
+label_size = 24
 
 [node name="DoorKids" type="Control" parent="."]
 layout_mode = 0
