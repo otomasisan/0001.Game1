@@ -1,5 +1,5 @@
 extends Node
-## 第1章と第2章を最初から最後まで自動で遊ぶ通しテスト。
+## 第1章〜第3章を最初から最後まで自動で遊ぶ通しテスト。
 ##   godot --headless --path . res://tests/smoke_test.tscn
 ## 画面つきで起動し "-- --shots=<dir>" を付けると、要所でスクリーンショットを保存する。
 
@@ -57,6 +57,13 @@ func shot(n: String) -> void:
 func click(id: String) -> void:
 	main.on_hotspot(id)
 	await wait_idle()
+
+
+func hotspot(id: String) -> Control:
+	for h in main.room_node.find_children("*", "Hotspot", true, false):
+		if h.hotspot_id == id:
+			return h
+	return null
 
 
 func run() -> void:
@@ -258,13 +265,79 @@ func run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	expect(GameState.chapter == 3 and GameState.has_flag("chapter2_clear"), "第2章クリアで章が進む")
 
+	# 4) 第3章: 第2章のあとそのまま続く
+	await shot("18_ch3_start")
+	expect(main.current_hint_stage().get("until", "") == "parents_door_open", "第3章のヒントは台所のドアから")
+	await click("living_to_kitchen")
+	expect(not hotspot("kitchen_memo").visible and hotspot("kitchen_to_parents").visible, "台所: れいぞうこが倒れてドアが現れる")
+	await shot("19_kitchen_ch3")
+	await click("kitchen_to_parents")
+	expect(GameState.room == "parents_room", "両親の部屋に入る")
+	await shot("20_parents_room")
+	await click("parents_hatch")
+	expect(GameState.room == "parents_room", "ゆかの とびらは最初は開かない")
+	await click("parents_mirror")
+
+	# 謎8: 工具箱の板
+	await click("parents_toolbox")
+	var tag = main.puzzle_node
+	expect(tag != null and not tag.is_sorted(), "謎8(工具箱の板)が開く")
+	await shot("21_tag_puzzle")
+	tag.solve_by_swaps()
+	expect(tag.is_solved, "板を並べて No.0217 が読める")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle()
+	expect(GameState.has_item("ear_tag") and GameState.has_flag("found_glasses"), "ふだと、とうさんのめがねを入手")
+
+	main.get_node("HUD/Inventory").selected = "ear_tag"
+	await click("parents_hatch")
+	expect(GameState.room == "basement" and not GameState.has_item("ear_tag"), "ふだを使って地下室へ")
+	await shot("22_basement")
+	await click("basement_trunk")
+	expect(main.puzzle_node == null, "さくが じゃまで トランクに近づけない")
+	await click("basement_straw")
+	expect(GameState.has_item("mother_ribbon"), "わらの中から かあさんのリボン")
+
+	# 謎9: 柵のスライド
+	await click("basement_fences")
+	var fences = main.puzzle_node
+	expect(fences != null and not fences.is_sorted(), "謎9(柵)が開く")
+	await shot("23_fences_puzzle")
+	var corner_far: int = 0 if fences.cells.find(fences.EMPTY) != 0 and not fences._neighbors(fences.cells.find(fences.EMPTY)).has(0) else -1
+	if corner_far == 0:
+		expect(not fences.slide(0), "空きのとなりでない区画は動かない")
+	fences.solve_by_undo()
+	expect(fences.is_solved, "道をつなげて柵が解ける")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle()
+
+	# 謎10: やぶれた手紙
+	await click("basement_trunk")
+	var letter = main.puzzle_node
+	expect(letter != null and not letter.is_done(), "謎10(やぶれた手紙)が開く")
+	await shot("24_letter_puzzle")
+	letter.select_strip(1)
+	letter.select_strip(1)
+	expect(not letter.flipped[1], "同じ切れはしを2回で ひっくり返る")
+	letter.solve_all()
+	expect(letter.is_solved, "手紙をつなぎ合わせて読める")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle(4000)
+	await wait_text(200)
+	await shot("25_chapter3_end")
+	await wait_idle(4000)
+	await get_tree().create_timer(0.5).timeout
+	expect(GameState.chapter == 4 and GameState.has_flag("chapter3_clear"), "第3章クリアで章が進む")
+
 	# デバッグ用: 第2章からすぐ始められる
 	GameState.debug_start_chapter(2)
 	expect(GameState.chapter == 2 and GameState.room == "kids_room" and GameState.has_flag("solved_books"), "第2章から始める確認用の状態")
+	GameState.debug_start_chapter(3)
+	expect(GameState.chapter == 3 and GameState.has_flag("solved_radio") and GameState.has_item("marble"), "第3章から始める確認用の状態")
 
-	# 4) セーブ/ロード
+	# 5) セーブ/ロード
 	GameState.new_game()
 	expect(GameState.load_game(), "セーブを読み込める")
-	expect(GameState.chapter == 3 and GameState.has_flag("solved_radio"), "読み込んだ内容が正しい")
+	expect(GameState.chapter == 4 and GameState.has_flag("solved_letter"), "読み込んだ内容が正しい")
 	await shot("09_title")
 	GameState.delete_save()

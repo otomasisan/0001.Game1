@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- ひつじのおるすばん / 地下室(第3章「ひみつの部屋」)
+       tools/gen_ch3_art.py で生成。フィルタは kitchen_ch1.svg と共通 -->
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="8" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.3" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.35 1.05" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.25  0 0 0 0.16 0"/>
+    </filter>
+    <filter id="blotch" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="3" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0 0.45  0 0 0 0.22 -0.06"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <pattern id="wallpaper" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#FBF0DC"/>
+      <rect x="0" width="8" height="120" fill="#F6DCD6" opacity="0.7"/>
+      <g fill="#F2BFC4" opacity="0.75">
+        <circle cx="60" cy="30" r="5"/><circle cx="66" cy="38" r="5"/><circle cx="54" cy="38" r="5"/>
+        <circle cx="57" cy="46" r="5"/><circle cx="64" cy="46" r="5"/>
+      </g>
+      <circle cx="60" cy="40" r="3" fill="#F7DD8A"/>
+      <g fill="#C9DDB0" opacity="0.8"><circle cx="30" cy="95" r="3"/><circle cx="90" cy="95" r="3"/></g>
+    </pattern>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A8D4EE"/><stop offset="1" stop-color="#E4F2F7"/>
+    </linearGradient>
+    <clipPath id="glass"><rect x="160" y="280" width="320" height="280"/></clipPath>
+    <radialGradient id="sunlight" cx="0.2" cy="0.35" r="0.55">
+      <stop offset="0" stop-color="#FFF6D8" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF6D8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <defs>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3E352E" stop-opacity="0.55"/><stop offset="0.6" stop-color="#3E352E" stop-opacity="0.15"/><stop offset="1" stop-color="#3E352E" stop-opacity="0.4"/>
+    </linearGradient>
+    <radialGradient id="shaft" cx="0.5" cy="0" r="1">
+      <stop offset="0" stop-color="#FFF4D6" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF4D6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== いたかべ と つちの ゆか ===== -->
+  <g filter="url(#wc)">
+    <rect x="-20" y="-20" width="1960" height="740" fill="#8E7660"/>
+    <rect x="-20" y="700" width="1960" height="400" fill="#7A6450"/>
+    <ellipse cx="1220" cy="900" rx="620" ry="150" fill="#A68C5E" opacity="0.7"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-linecap="round" fill="none">
+    <g stroke-width="4" opacity="0.6">
+      <path d="M60 -10 V700"/><path d="M190 -10 V700"/><path d="M320 -10 V700"/><path d="M450 -10 V700"/><path d="M580 -10 V700"/><path d="M710 -10 V700"/><path d="M840 -10 V700"/><path d="M970 -10 V700"/><path d="M1100 -10 V700"/><path d="M1230 -10 V700"/><path d="M1360 -10 V700"/><path d="M1490 -10 V700"/><path d="M1620 -10 V700"/><path d="M1750 -10 V700"/><path d="M1880 -10 V700"/>
+    </g>
+    <path d="M-10 700 H1930" stroke-width="6"/>
+    <g stroke-width="3" opacity="0.4"><path d="M200 220 q20 4 30 -6"/><path d="M1300 160 q20 4 30 -6"/><path d="M820 520 q20 4 30 -6"/></g>
+  </g>
+  <!-- たかい ところの ちいさな まど(ひかりが さしこむ) -->
+  <g filter="url(#wc)"><rect x="1120" y="60" width="200" height="60" fill="#DCE4E6"/></g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="5" fill="none"><rect x="1120" y="60" width="200" height="60"/><path d="M1186 60 v60 M1252 60 v60"/></g>
+  <polygon points="1120,120 1320,120 1520,900 900,900" fill="url(#shaft)" filter="url(#soft)"/>
+
+  <!-- ===== うえへの はしご (80,120)-(300,820) ===== -->
+  <g filter="url(#wc)"><rect x="60" y="-20" width="260" height="120" fill="#C9B79A"/></g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M110 40 L130 820 M270 40 L250 820"/>
+    <g stroke-width="6"><path d="M114 100 H266"/><path d="M114 190 H266"/><path d="M115 280 H265"/><path d="M115 370 H265"/><path d="M116 460 H264"/><path d="M116 550 H264"/><path d="M116 640 H264"/><path d="M117 730 H263"/></g>
+    <path d="M60 100 H320" stroke-width="5"/>
+  </g>
+
+  <!-- ===== さくと とびら(謎9) (520,300)-(1000,760) ===== -->
+  <g filter="url(#wc)">
+    <rect x="530" y="420" width="460" height="300" fill="#B08E66" opacity="0.6"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <g stroke="#C9A877" stroke-width="16">
+      <path d="M540 440 H980"/><path d="M540 560 H980"/><path d="M540 680 H980"/>
+      <path d="M560 400 V740"/><path d="M700 400 V740"/><path d="M840 400 V740"/><path d="M970 400 V740"/>
+    </g>
+    <path d="M540 440 H980 M540 560 H980 M540 680 H980" stroke-width="4"/>
+    <path d="M560 400 V740 M700 400 V740 M840 400 V740 M970 400 V740" stroke-width="4"/>
+    <!-- ななめの とびら(かんぬき) -->
+    <path d="M700 440 L840 680" stroke="#C9A877" stroke-width="16"/>
+    <path d="M700 440 L840 680" stroke-width="4"/>
+    <!-- さくに かけられた いたの ずめん -->
+    <rect x="600" y="300" width="300" height="110" rx="6" fill="#E7DCC6" stroke-width="5"/>
+    <g stroke-width="3"><rect x="620" y="318" width="80" height="34"/><rect x="700" y="318" width="80" height="34"/><rect x="780" y="318" width="100" height="34"/><rect x="620" y="352" width="120" height="40"/><rect x="740" y="352" width="140" height="40"/></g>
+  </g>
+
+  <!-- ===== かいばおけ (1100,560)-(1380,700) ===== -->
+  <g filter="url(#wc)"><polygon points="1110,580 1370,580 1340,690 1140,690" fill="#9C7A5A"/></g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <polygon points="1110,580 1370,580 1340,690 1140,690"/>
+    <path d="M1150 690 v30 M1330 690 v30" stroke-width="9"/>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M1130 584 q30 -20 60 -4"/><path d="M1200 582 q40 -24 70 0"/><path d="M1280 584 q30 -18 70 -2"/></g>
+  </g>
+
+  <!-- ===== わらの やま (1060,760)-(1400,960) かあさんの リボンが のぞく ===== -->
+  <g filter="url(#wc)">
+    <path d="M1060 950 Q1080 800 1230 770 Q1380 790 1400 950 Z" fill="#D9C27A"/>
+  </g>
+  <!-- 藁 -->
+  <g filter="url(#wobble)" stroke-linecap="round" fill="none">
+    <g stroke="#9C8546" stroke-width="7"><path d="M1232 877 Q1251 871 1271 880"/><path d="M1330 862 Q1356 856 1382 859"/><path d="M1262 902 Q1281 896 1300 894"/><path d="M1171 860 Q1193 854 1215 842"/><path d="M1169 884 Q1199 878 1229 912"/><path d="M1314 871 Q1342 865 1370 864"/><path d="M1150 897 Q1171 891 1191 887"/><path d="M1247 905 Q1275 899 1302 917"/><path d="M1185 872 Q1208 866 1231 889"/><path d="M1296 858 Q1316 852 1336 841"/><path d="M1172 867 Q1201 861 1229 885"/><path d="M1147 858 Q1163 852 1180 848"/><path d="M1297 874 Q1310 868 1324 886"/><path d="M1241 860 Q1260 854 1280 874"/><path d="M1152 884 Q1165 878 1179 894"/><path d="M1149 902 Q1164 896 1178 899"/><path d="M1359 904 Q1376 898 1392 902"/><path d="M1088 893 Q1114 887 1139 907"/><path d="M1287 872 Q1310 866 1333 862"/><path d="M1318 878 Q1338 872 1357 879"/><path d="M1327 905 Q1356 899 1385 891"/><path d="M1324 875 Q1349 869 1373 863"/><path d="M1243 885 Q1272 879 1302 914"/><path d="M1291 881 Q1305 875 1320 871"/><path d="M1326 867 Q1344 861 1362 873"/><path d="M1144 890 Q1159 884 1173 881"/><path d="M1379 875 Q1405 869 1432 867"/><path d="M1143 896 Q1169 890 1194 882"/><path d="M1306 859 Q1333 853 1360 852"/><path d="M1227 876 Q1243 870 1259 863"/><path d="M1364 906 Q1388 900 1412 907"/><path d="M1120 904 Q1145 898 1171 911"/><path d="M1337 866 Q1358 860 1379 874"/><path d="M1171 862 Q1187 856 1203 869"/><path d="M1130 874 Q1150 868 1171 871"/><path d="M1147 906 Q1174 900 1200 884"/><path d="M1306 878 Q1334 872 1361 867"/><path d="M1304 866 Q1328 860 1352 884"/><path d="M1132 905 Q1147 899 1163 900"/><path d="M1367 894 Q1390 888 1412 892"/></g>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M1232 877 Q1251 871 1271 880"/><path d="M1330 862 Q1356 856 1382 859"/><path d="M1262 902 Q1281 896 1300 894"/><path d="M1171 860 Q1193 854 1215 842"/><path d="M1169 884 Q1199 878 1229 912"/><path d="M1314 871 Q1342 865 1370 864"/><path d="M1150 897 Q1171 891 1191 887"/><path d="M1247 905 Q1275 899 1302 917"/><path d="M1185 872 Q1208 866 1231 889"/><path d="M1296 858 Q1316 852 1336 841"/><path d="M1172 867 Q1201 861 1229 885"/><path d="M1147 858 Q1163 852 1180 848"/><path d="M1297 874 Q1310 868 1324 886"/><path d="M1241 860 Q1260 854 1280 874"/><path d="M1152 884 Q1165 878 1179 894"/><path d="M1149 902 Q1164 896 1178 899"/><path d="M1359 904 Q1376 898 1392 902"/><path d="M1088 893 Q1114 887 1139 907"/><path d="M1287 872 Q1310 866 1333 862"/><path d="M1318 878 Q1338 872 1357 879"/><path d="M1327 905 Q1356 899 1385 891"/><path d="M1324 875 Q1349 869 1373 863"/><path d="M1243 885 Q1272 879 1302 914"/><path d="M1291 881 Q1305 875 1320 871"/><path d="M1326 867 Q1344 861 1362 873"/><path d="M1144 890 Q1159 884 1173 881"/><path d="M1379 875 Q1405 869 1432 867"/><path d="M1143 896 Q1169 890 1194 882"/><path d="M1306 859 Q1333 853 1360 852"/><path d="M1227 876 Q1243 870 1259 863"/><path d="M1364 906 Q1388 900 1412 907"/><path d="M1120 904 Q1145 898 1171 911"/><path d="M1337 866 Q1358 860 1379 874"/><path d="M1171 862 Q1187 856 1203 869"/><path d="M1130 874 Q1150 868 1171 871"/><path d="M1147 906 Q1174 900 1200 884"/><path d="M1306 878 Q1334 872 1361 867"/><path d="M1304 866 Q1328 860 1352 884"/><path d="M1132 905 Q1147 899 1163 900"/><path d="M1367 894 Q1390 888 1412 892"/></g>
+  </g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="5" stroke-linejoin="round" fill="none">
+    <path d="M1060 950 Q1080 800 1230 770 Q1380 790 1400 950 Z"/>
+    <path d="M1300 860 q22 -10 34 6 q-10 18 -34 -6 Z" fill="#D9707E" stroke-width="3"/>
+    <path d="M1304 864 q-6 24 -20 34" stroke="#D9707E" stroke-width="6"/>
+  </g>
+
+  <!-- ===== ふるい トランク (1460,560)-(1800,800) ===== -->
+  <g filter="url(#wc)">
+    <rect x="1470" y="620" width="320" height="176" rx="12" fill="#8F6A4C"/>
+    <path d="M1470 640 Q1630 560 1790 640 Z" fill="#9F7A58"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#3E3026" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="1470" y="620" width="320" height="176" rx="12"/>
+    <path d="M1470 640 Q1630 560 1790 640"/>
+    <path d="M1540 600 V796 M1720 600 V796" stroke="#C9A877" stroke-width="12"/>
+    <path d="M1540 600 V796 M1720 600 V796" stroke-width="3"/>
+    <rect x="1612" y="660" width="36" height="40" rx="6" fill="#C9A877" stroke-width="4"/>
+    <!-- すきまから はみでた てがみの きれはし -->
+    <path d="M1580 636 l30 -20 l14 16 l-30 18 Z" fill="#F3EAD8" stroke-width="3"/>
+  </g>
+  <!-- 藁 -->
+  <g filter="url(#wobble)" stroke-linecap="round" fill="none">
+    <g stroke="#9C8546" stroke-width="7"><path d="M258 939 Q288 933 317 939"/><path d="M712 976 Q728 970 743 981"/><path d="M781 932 Q796 926 810 934"/><path d="M369 982 Q383 976 398 971"/><path d="M381 922 Q403 916 424 921"/><path d="M284 879 Q302 873 320 874"/><path d="M526 947 Q547 941 567 956"/><path d="M421 958 Q446 952 470 978"/><path d="M178 915 Q207 909 237 943"/><path d="M363 905 Q378 899 393 890"/><path d="M209 999 Q228 993 247 1016"/><path d="M178 991 Q207 985 235 998"/><path d="M365 984 Q389 978 413 999"/><path d="M615 965 Q645 959 674 962"/><path d="M228 929 Q249 923 270 923"/><path d="M731 888 Q752 882 772 884"/><path d="M416 954 Q440 948 464 963"/><path d="M504 924 Q530 918 557 950"/><path d="M612 889 Q637 883 661 883"/><path d="M289 931 Q304 925 319 929"/><path d="M732 988 Q748 982 764 981"/><path d="M335 966 Q360 960 386 952"/><path d="M780 890 Q805 884 830 900"/><path d="M582 959 Q597 953 613 952"/><path d="M781 901 Q807 895 834 923"/><path d="M425 938 Q442 932 459 931"/><path d="M709 888 Q739 882 768 871"/><path d="M402 951 Q427 945 452 957"/><path d="M732 976 Q751 970 770 968"/><path d="M834 990 Q852 984 870 988"/></g>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M258 939 Q288 933 317 939"/><path d="M712 976 Q728 970 743 981"/><path d="M781 932 Q796 926 810 934"/><path d="M369 982 Q383 976 398 971"/><path d="M381 922 Q403 916 424 921"/><path d="M284 879 Q302 873 320 874"/><path d="M526 947 Q547 941 567 956"/><path d="M421 958 Q446 952 470 978"/><path d="M178 915 Q207 909 237 943"/><path d="M363 905 Q378 899 393 890"/><path d="M209 999 Q228 993 247 1016"/><path d="M178 991 Q207 985 235 998"/><path d="M365 984 Q389 978 413 999"/><path d="M615 965 Q645 959 674 962"/><path d="M228 929 Q249 923 270 923"/><path d="M731 888 Q752 882 772 884"/><path d="M416 954 Q440 948 464 963"/><path d="M504 924 Q530 918 557 950"/><path d="M612 889 Q637 883 661 883"/><path d="M289 931 Q304 925 319 929"/><path d="M732 988 Q748 982 764 981"/><path d="M335 966 Q360 960 386 952"/><path d="M780 890 Q805 884 830 900"/><path d="M582 959 Q597 953 613 952"/><path d="M781 901 Q807 895 834 923"/><path d="M425 938 Q442 932 459 931"/><path d="M709 888 Q739 882 768 871"/><path d="M402 951 Q427 945 452 957"/><path d="M732 976 Q751 970 770 968"/><path d="M834 990 Q852 984 870 988"/></g>
+  </g>
+  <!-- 藁 -->
+  <g filter="url(#wobble)" stroke-linecap="round" fill="none">
+    <g stroke="#9C8546" stroke-width="7"><path d="M1648 926 Q1668 920 1687 910"/><path d="M1470 911 Q1488 905 1506 899"/><path d="M1777 868 Q1796 862 1814 855"/><path d="M1775 898 Q1803 892 1831 905"/><path d="M1542 896 Q1568 890 1595 879"/><path d="M1458 918 Q1481 912 1503 912"/><path d="M1525 931 Q1545 925 1566 924"/><path d="M1825 907 Q1842 901 1859 901"/><path d="M1814 916 Q1837 910 1859 921"/><path d="M1819 873 Q1846 867 1872 866"/><path d="M1713 909 Q1734 903 1755 915"/><path d="M1674 895 Q1691 889 1709 911"/><path d="M1553 887 Q1576 881 1599 871"/><path d="M1681 869 Q1709 863 1737 855"/><path d="M1558 912 Q1574 906 1589 910"/><path d="M1839 910 Q1861 904 1884 898"/></g>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M1648 926 Q1668 920 1687 910"/><path d="M1470 911 Q1488 905 1506 899"/><path d="M1777 868 Q1796 862 1814 855"/><path d="M1775 898 Q1803 892 1831 905"/><path d="M1542 896 Q1568 890 1595 879"/><path d="M1458 918 Q1481 912 1503 912"/><path d="M1525 931 Q1545 925 1566 924"/><path d="M1825 907 Q1842 901 1859 901"/><path d="M1814 916 Q1837 910 1859 921"/><path d="M1819 873 Q1846 867 1872 866"/><path d="M1713 909 Q1734 903 1755 915"/><path d="M1674 895 Q1691 889 1709 911"/><path d="M1553 887 Q1576 881 1599 871"/><path d="M1681 869 Q1709 863 1737 855"/><path d="M1558 912 Q1574 906 1589 910"/><path d="M1839 910 Q1861 904 1884 898"/></g>
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#dark)" style="mix-blend-mode:multiply"/>
+  <!-- ===== 第3章: 色があせて灰色に ===== -->
+  <rect width="1920" height="1080" fill="#8A8A8A" opacity="0.62" style="mix-blend-mode:saturation"/>
+  <defs>
+    <linearGradient id="ch3_grey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B9C2CC" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#8C8A94" stop-opacity="0.30"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#ch3_grey)" style="mix-blend-mode:multiply"/>
+
+  <!-- ===== 紙の質感 ===== -->
+  <rect width="1920" height="1080" filter="url(#blotch)"/>
+  <rect width="1920" height="1080" filter="url(#paper)"/>
+</svg>

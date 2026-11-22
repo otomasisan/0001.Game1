@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- ひつじのおるすばん / 両親の部屋(第3章「ひみつの部屋」)
+       tools/gen_ch3_art.py で生成。フィルタは kitchen_ch1.svg と共通 -->
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="8" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.3" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.35 1.05" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.25  0 0 0 0.16 0"/>
+    </filter>
+    <filter id="blotch" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="3" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0 0.45  0 0 0 0.22 -0.06"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <pattern id="wallpaper" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#FBF0DC"/>
+      <rect x="0" width="8" height="120" fill="#F6DCD6" opacity="0.7"/>
+      <g fill="#F2BFC4" opacity="0.75">
+        <circle cx="60" cy="30" r="5"/><circle cx="66" cy="38" r="5"/><circle cx="54" cy="38" r="5"/>
+        <circle cx="57" cy="46" r="5"/><circle cx="64" cy="46" r="5"/>
+      </g>
+      <circle cx="60" cy="40" r="3" fill="#F7DD8A"/>
+      <g fill="#C9DDB0" opacity="0.8"><circle cx="30" cy="95" r="3"/><circle cx="90" cy="95" r="3"/></g>
+    </pattern>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A8D4EE"/><stop offset="1" stop-color="#E4F2F7"/>
+    </linearGradient>
+    <clipPath id="glass"><rect x="160" y="280" width="320" height="280"/></clipPath>
+    <radialGradient id="sunlight" cx="0.2" cy="0.35" r="0.55">
+      <stop offset="0" stop-color="#FFF6D8" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF6D8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <defs>
+    <pattern id="wallpaper5" width="140" height="140" patternUnits="userSpaceOnUse">
+      <rect width="140" height="140" fill="#EFE3D3"/>
+      <path d="M70 20 q20 20 0 40 q-20 20 0 40 q20 20 0 40" stroke="#D9C3B8" stroke-width="6" fill="none"/>
+      <circle cx="20" cy="70" r="6" fill="#D8C9D9"/><circle cx="120" cy="70" r="6" fill="#D8C9D9"/>
+    </pattern>
+    <linearGradient id="lamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF3D6" stop-opacity="0.35"/><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== 壁と床 ===== -->
+  <g filter="url(#wc)">
+    <rect x="-20" y="-20" width="1960" height="680" fill="url(#wallpaper5)"/>
+    <rect x="-20" y="640" width="1960" height="150" fill="#D8C8B4"/>
+    <rect x="-20" y="780" width="1960" height="320" fill="#B99A7A"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-linecap="round" fill="none">
+    <path d="M-10 640 H1930" stroke-width="5"/>
+    <path d="M-10 780 H1930" stroke-width="6"/>
+    <g stroke-width="3" opacity="0.45">
+      <path d="M-10 840 H1930"/><path d="M-10 920 H1930"/><path d="M-10 1010 H1930"/>
+      <path d="M300 840 L280 920"/><path d="M980 920 L960 1010"/><path d="M1700 780 L1690 840"/><path d="M640 1010 L620 1080"/>
+    </g>
+  </g>
+  <!-- 壁紙のはがれ -->
+  <defs><clipPath id="peel71"><polygon points="556,42 627,51 670,34 690,109 710,164 663,198 599,212 547,196 552,118"/></clipPath></defs>
+  <g filter="url(#wc)">
+    <polygon points="556,42 627,51 670,34 690,109 710,164 663,198 599,212 547,196 552,118" fill="#C4A77F"/>
+    <g clip-path="url(#peel71)" stroke="#A98C66" stroke-width="5" opacity="0.8"><path d="M570 44 V206"/><path d="M588 44 V206"/><path d="M606 44 V206"/><path d="M624 44 V206"/><path d="M642 44 V206"/><path d="M660 44 V206"/></g>
+    <path d="M694 170 Q730 180 726 218 Q700 206 670 206 Z" fill="#EFE4D2"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="4" stroke-linejoin="round" fill="none">
+    <polygon points="556,42 627,51 670,34 690,109 710,164 663,198 599,212 547,196 552,118"/>
+    <g clip-path="url(#peel71)" stroke-width="3" opacity="0.55"><path d="M560 125 H700"/></g>
+    <path d="M694 170 Q730 180 726 218 Q700 206 670 206 Z"/>
+  </g>
+  <!-- 壁紙のはがれ -->
+  <defs><clipPath id="peel72"><polygon points="888,101 954,99 989,87 1018,180 1015,289 981,359 945,357 905,311 908,214"/></clipPath></defs>
+  <g filter="url(#wc)">
+    <polygon points="888,101 954,99 989,87 1018,180 1015,289 981,359 945,357 905,311 908,214" fill="#C4A77F"/>
+    <g clip-path="url(#peel72)" stroke="#A98C66" stroke-width="5" opacity="0.8"><path d="M910 94 V346"/><path d="M928 94 V346"/><path d="M946 94 V346"/><path d="M964 94 V346"/><path d="M982 94 V346"/></g>
+    <path d="M1004 310 Q1040 320 1036 358 Q1010 346 980 346 Z" fill="#EFE4D2"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="4" stroke-linejoin="round" fill="none">
+    <polygon points="888,101 954,99 989,87 1018,180 1015,289 981,359 945,357 905,311 908,214"/>
+    <g clip-path="url(#peel72)" stroke-width="3" opacity="0.55"><path d="M900 220 H1010"/></g>
+    <path d="M1004 310 Q1040 320 1036 358 Q1010 346 980 346 Z"/>
+  </g>
+  <!-- 壁紙のはがれ -->
+  <defs><clipPath id="peel73"><polygon points="1494,49 1555,61 1611,51 1620,115 1624,188 1594,238 1542,242 1492,220 1489,126"/></clipPath></defs>
+  <g filter="url(#wc)">
+    <polygon points="1494,49 1555,61 1611,51 1620,115 1624,188 1594,238 1542,242 1492,220 1489,126" fill="#C4A77F"/>
+    <g clip-path="url(#peel73)" stroke="#A98C66" stroke-width="5" opacity="0.8"><path d="M1510 64 V236"/><path d="M1528 64 V236"/><path d="M1546 64 V236"/><path d="M1564 64 V236"/><path d="M1582 64 V236"/></g>
+    <path d="M1614 200 Q1650 210 1646 248 Q1620 236 1590 236 Z" fill="#EFE4D2"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="4" stroke-linejoin="round" fill="none">
+    <polygon points="1494,49 1555,61 1611,51 1620,115 1624,188 1594,238 1542,242 1492,220 1489,126"/>
+    <g clip-path="url(#peel73)" stroke-width="3" opacity="0.55"><path d="M1500 150 H1620"/></g>
+    <path d="M1614 200 Q1650 210 1646 248 Q1620 236 1590 236 Z"/>
+  </g>
+
+  <!-- ===== だいどころへのドア (10,380)-(160,780) ===== -->
+  <g filter="url(#wc)"><path d="M16 776 V450 Q16 386 85 386 Q154 386 154 450 V776 Z" fill="#B48A64"/></g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" fill="none">
+    <path d="M16 776 V450 Q16 386 85 386 Q154 386 154 450 V776 Z"/>
+    <g stroke-width="3" opacity="0.6"><path d="M62 400 V776"/><path d="M108 400 V776"/></g>
+    <circle cx="140" cy="610" r="9" fill="#5A4636"/>
+  </g>
+
+  <!-- ===== ようふくだんす (240,220)-(520,780) ===== -->
+  <g filter="url(#wc)">
+    <rect x="244" y="226" width="272" height="550" rx="10" fill="#B98258"/>
+    <rect x="262" y="250" width="114" height="440" rx="6" fill="#C8956A"/>
+    <rect x="384" y="250" width="114" height="440" rx="6" fill="#C8956A"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="244" y="226" width="272" height="550" rx="10"/>
+    <rect x="262" y="250" width="114" height="440" rx="6"/>
+    <rect x="384" y="250" width="114" height="440" rx="6"/>
+    <path d="M362 450 v40 M398 450 v40" stroke-width="7"/>
+    <path d="M244 712 H516" stroke-width="4"/>
+    <!-- すこし あいた すきまから えりまき(かあさんの もの?) -->
+    <path d="M376 520 q14 30 0 70" stroke="#C97A84" stroke-width="8"/>
+    <path d="M262 776 v14 M498 776 v14" stroke-width="10"/>
+  </g>
+
+  <!-- ===== かぞくの しゃしん (620,260)-(860,440) ===== -->
+  <g filter="url(#wc)">
+    <rect x="626" y="266" width="228" height="168" rx="6" fill="#D9B48A"/>
+    <rect x="644" y="284" width="192" height="132" fill="#E9F0E2"/>
+    <ellipse cx="740" cy="410" rx="100" ry="26" fill="#B9D3A6"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="626" y="266" width="228" height="168" rx="6" stroke-width="5"/>
+    <rect x="644" y="284" width="192" height="132"/>
+    <!-- とうさんと かあさん(大きい ひつじ)。耳に きいろい ふだ -->
+    <g fill="#FFFFFF"><circle cx="690" cy="372" r="24"/><circle cx="706" cy="360" r="20"/><circle cx="776" cy="372" r="24"/><circle cx="792" cy="360" r="20"/></g>
+    <g fill="#5A4636"><ellipse cx="672" cy="352" rx="11" ry="14"/><ellipse cx="758" cy="352" rx="11" ry="14"/></g>
+    <g fill="#E8C267" stroke-width="2"><rect x="656" y="334" width="10" height="12" rx="2"/><rect x="742" y="334" width="10" height="12" rx="2"/></g>
+    <path d="M690 396 v12 M706 396 v12 M776 396 v12 M792 396 v12" stroke-width="3"/>
+  </g>
+  <path d="M740 266 L700 230 L780 230 Z" fill="none" stroke="#5A4636" stroke-width="3" filter="url(#wobble)"/>
+
+  <!-- ===== とうさんの どうぐばこ (600,660)-(900,800) ===== -->
+  <g filter="url(#wc)">
+    <rect x="610" y="700" width="280" height="96" rx="10" fill="#B85C52"/>
+    <rect x="604" y="684" width="292" height="30" rx="8" fill="#C96E62"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="610" y="700" width="280" height="96" rx="10"/>
+    <rect x="604" y="684" width="292" height="30" rx="8"/>
+    <path d="M700 684 V662 H800 V684" stroke-width="7"/>
+    <rect x="736" y="722" width="28" height="20" rx="4" fill="#E8C267" stroke-width="3"/>
+    <!-- はみだした かなづちの え -->
+    <path d="M880 690 l40 -50" stroke-width="8"/>
+    <rect x="906" y="622" width="40" height="22" rx="4" transform="rotate(-50 926 633)" fill="#9AA0A6" stroke-width="4"/>
+  </g>
+
+  <!-- ===== ふたりの ベッド (980,540)-(1560,860) ===== -->
+  <g filter="url(#wc)">
+    <rect x="990" y="520" width="60" height="330" rx="22" fill="#B98258"/>
+    <rect x="1500" y="600" width="56" height="250" rx="22" fill="#B98258"/>
+    <rect x="1040" y="660" width="470" height="150" rx="18" fill="#F6EFE3"/>
+    <path d="M1040 700 Q1270 640 1510 700 V810 H1040 Z" fill="#C9B6D6"/>
+    <ellipse cx="1120" cy="660" rx="64" ry="30" fill="#FFFFFF"/>
+    <ellipse cx="1250" cy="656" rx="64" ry="30" fill="#FFFFFF"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="990" y="520" width="60" height="330" rx="22"/>
+    <rect x="1500" y="600" width="56" height="250" rx="22"/>
+    <rect x="1040" y="660" width="470" height="150" rx="18"/>
+    <path d="M1040 700 Q1270 640 1510 700 V810 H1040 Z"/>
+    <ellipse cx="1120" cy="660" rx="64" ry="30"/>
+    <ellipse cx="1250" cy="656" rx="64" ry="30"/>
+    <g stroke="#FFFFFF" stroke-width="4" opacity="0.7"><path d="M1100 740 h60"/><path d="M1300 730 h60"/><path d="M1200 770 h60"/></g>
+    <path d="M1000 850 v24 M1546 850 v24" stroke-width="12"/>
+  </g>
+
+  <!-- ===== ぬのを かけた かがみと たんす (1620,260)-(1880,800) ===== -->
+  <g filter="url(#wc)">
+    <rect x="1626" y="560" width="250" height="236" rx="10" fill="#B98258"/>
+    <path d="M1660 560 V300 Q1660 266 1750 266 Q1840 266 1840 300 V560 Z" fill="#9AA6B0"/>
+    <path d="M1650 290 Q1750 240 1852 290 L1866 520 Q1820 545 1790 520 Q1750 550 1712 522 Q1676 548 1638 520 Z" fill="#E6E0D6"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="1626" y="560" width="250" height="236" rx="10"/>
+    <path d="M1626 640 H1876 M1626 718 H1876" stroke-width="4"/>
+    <g fill="#5A4636"><rect x="1736" y="594" width="30" height="10" rx="4"/><rect x="1736" y="674" width="30" height="10" rx="4"/><rect x="1736" y="750" width="30" height="10" rx="4"/></g>
+    <path d="M1660 560 V300 Q1660 266 1750 266 Q1840 266 1840 300 V560"/>
+    <path d="M1650 290 Q1750 240 1852 290 L1866 520 Q1820 545 1790 520 Q1750 550 1712 522 Q1676 548 1638 520 Z"/>
+    <g stroke-width="3" opacity="0.5"><path d="M1700 300 q10 100 0 210"/><path d="M1790 290 q-12 110 0 220"/></g>
+  </g>
+
+  <!-- ===== ゆかの かくしとびら (1060,900)-(1420,1040) ===== -->
+  <g filter="url(#wc)">
+    <polygon points="1080,910 1400,910 1424,1036 1056,1036" fill="#9C7A5A"/>
+  </g>
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <polygon points="1080,910 1400,910 1424,1036 1056,1036"/>
+    <g stroke-width="3" opacity="0.6"><path d="M1160 910 L1152 1036"/><path d="M1240 910 L1240 1036"/><path d="M1320 910 L1328 1036"/></g>
+    <rect x="1360" y="950" width="40" height="14" rx="6" fill="#5A4636"/>
+    <!-- みみの ふだの かたちの くぼみ -->
+    <path d="M1206 944 h56 q12 0 12 12 v36 q0 12 -12 12 h-56 q-12 0 -12 -12 v-36 q0 -12 12 -12 Z" fill="#6F563F" stroke-width="4"/>
+    <circle cx="1234" cy="956" r="6" fill="#9C7A5A" stroke-width="3"/>
+  </g>
+  <!-- 藁 -->
+  <g filter="url(#wobble)" stroke-linecap="round" fill="none">
+    <g stroke="#9C8546" stroke-width="7"><path d="M1830 961 Q1845 955 1860 949"/><path d="M1631 984 Q1650 978 1669 1001"/><path d="M1679 957 Q1700 951 1720 975"/><path d="M1633 960 Q1655 954 1676 939"/><path d="M1566 981 Q1595 975 1624 977"/><path d="M1671 945 Q1699 939 1727 973"/><path d="M1520 991 Q1549 985 1577 1012"/><path d="M1724 975 Q1743 969 1761 983"/><path d="M1527 972 Q1542 966 1557 986"/><path d="M1769 960 Q1794 954 1819 954"/><path d="M1736 978 Q1756 972 1777 975"/><path d="M1744 942 Q1758 936 1772 954"/><path d="M1822 936 Q1852 930 1882 915"/><path d="M1758 946 Q1776 940 1794 953"/><path d="M1779 948 Q1793 942 1808 945"/><path d="M1724 939 Q1744 933 1764 940"/></g>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M1830 961 Q1845 955 1860 949"/><path d="M1631 984 Q1650 978 1669 1001"/><path d="M1679 957 Q1700 951 1720 975"/><path d="M1633 960 Q1655 954 1676 939"/><path d="M1566 981 Q1595 975 1624 977"/><path d="M1671 945 Q1699 939 1727 973"/><path d="M1520 991 Q1549 985 1577 1012"/><path d="M1724 975 Q1743 969 1761 983"/><path d="M1527 972 Q1542 966 1557 986"/><path d="M1769 960 Q1794 954 1819 954"/><path d="M1736 978 Q1756 972 1777 975"/><path d="M1744 942 Q1758 936 1772 954"/><path d="M1822 936 Q1852 930 1882 915"/><path d="M1758 946 Q1776 940 1794 953"/><path d="M1779 948 Q1793 942 1808 945"/><path d="M1724 939 Q1744 933 1764 940"/></g>
+  </g>
+  <!-- 藁 -->
+  <g filter="url(#wobble)" stroke-linecap="round" fill="none">
+    <g stroke="#9C8546" stroke-width="7"><path d="M378 995 Q404 989 430 971"/><path d="M476 1014 Q501 1008 525 1012"/><path d="M568 1015 Q597 1009 625 1006"/><path d="M319 967 Q341 961 362 956"/><path d="M559 988 Q577 982 594 994"/><path d="M192 1038 Q213 1032 234 1041"/><path d="M477 971 Q496 965 514 985"/><path d="M602 974 Q620 968 638 972"/><path d="M451 965 Q470 959 488 949"/><path d="M205 1025 Q224 1019 242 1011"/><path d="M410 969 Q428 963 446 986"/><path d="M429 977 Q452 971 476 965"/><path d="M491 1023 Q520 1017 549 1049"/><path d="M376 962 Q404 956 432 943"/></g>
+    <g stroke="#E3CB82" stroke-width="4"><path d="M378 995 Q404 989 430 971"/><path d="M476 1014 Q501 1008 525 1012"/><path d="M568 1015 Q597 1009 625 1006"/><path d="M319 967 Q341 961 362 956"/><path d="M559 988 Q577 982 594 994"/><path d="M192 1038 Q213 1032 234 1041"/><path d="M477 971 Q496 965 514 985"/><path d="M602 974 Q620 968 638 972"/><path d="M451 965 Q470 959 488 949"/><path d="M205 1025 Q224 1019 242 1011"/><path d="M410 969 Q428 963 446 986"/><path d="M429 977 Q452 971 476 965"/><path d="M491 1023 Q520 1017 549 1049"/><path d="M376 962 Q404 956 432 943"/></g>
+  </g>
+
+  <rect width="1920" height="700" fill="url(#lamp)"/>
+  <!-- ===== 第3章: 色があせて灰色に ===== -->
+  <rect width="1920" height="1080" fill="#8A8A8A" opacity="0.62" style="mix-blend-mode:saturation"/>
+  <defs>
+    <linearGradient id="ch3_grey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B9C2CC" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#8C8A94" stop-opacity="0.30"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#ch3_grey)" style="mix-blend-mode:multiply"/>
+
+  <!-- ===== 紙の質感 ===== -->
+  <rect width="1920" height="1080" filter="url(#blotch)"/>
+  <rect width="1920" height="1080" filter="url(#paper)"/>
+</svg>

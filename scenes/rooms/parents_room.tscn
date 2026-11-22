@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/characters/moko.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/rooms/parents_room_ch3.png" id="bg3"]
+
+[node name="ParentsRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+room_id = "parents_room"
+name_key = "ROOM_PARENTS"
+wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
+floor_color = Color(0.73, 0.6, 0.48, 1)
+backgrounds = Array[Texture2D]([null, null, ExtResource("bg3")])
+
+
+[node name="DoorKitchen" type="Control" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 380.0
+offset_right = 160.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "parents_to_kitchen"
+label_key = "LBL_TO_KITCHEN"
+fill_color = Color(0.71, 0.54, 0.39, 1)
+shape = 2
+label_size = 24
+
+[node name="Wardrobe" type="Control" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 220.0
+offset_right = 520.0
+offset_bottom = 700.0
+script = ExtResource("2")
+hotspot_id = "parents_wardrobe"
+label_key = "LBL_WARDROBE"
+fill_color = Color(0.73, 0.51, 0.35, 1)
+
+[node name="Photo" type="Control" parent="."]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 230.0
+offset_right = 860.0
+offset_bottom = 440.0
+script = ExtResource("2")
+hotspot_id = "parents_photo"
+label_key = "LBL_PHOTO"
+fill_color = Color(0.85, 0.71, 0.54, 1)
+
+[node name="Toolbox" type="Control" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 640.0
+offset_right = 940.0
+offset_bottom = 800.0
+script = ExtResource("2")
+hotspot_id = "parents_toolbox"
+label_key = "LBL_TOOLBOX"
+fill_color = Color(0.72, 0.36, 0.32, 1)
+
+[node name="Bed" type="Control" parent="."]
+layout_mode = 0
+offset_left = 990.0
+offset_top = 560.0
+offset_right = 1560.0
+offset_bottom = 860.0
+script = ExtResource("2")
+hotspot_id = "parents_bed"
+label_key = "LBL_BED"
+fill_color = Color(0.79, 0.71, 0.84, 1)
+
+[node name="Mirror" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1630.0
+offset_top = 250.0
+offset_right = 1870.0
+offset_bottom = 800.0
+script = ExtResource("2")
+hotspot_id = "parents_mirror"
+label_key = "LBL_MIRROR"
+fill_color = Color(0.9, 0.88, 0.84, 1)
+
+[node name="Hatch" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 900.0
+offset_right = 1430.0
+offset_bottom = 1040.0
+script = ExtResource("2")
+hotspot_id = "parents_hatch"
+label_key = "LBL_HATCH"
+fill_color = Color(0.61, 0.48, 0.35, 1)
+
+[node name="Moko" type="Control" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 720.0
+offset_right = 600.0
+offset_bottom = 1000.0
+script = ExtResource("3")
+texture = ExtResource("4")

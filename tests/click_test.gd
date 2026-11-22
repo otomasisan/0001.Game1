@@ -1,5 +1,5 @@
 extends Node
-## 本物のマウス入力(画面座標のクリック)でタイトルから遊ぶテスト。
+## 本物のマウス入力(画面座標のクリック)でタイトルから遊ぶテスト(第1章・第2章・第3章)。
 ##   godot --path . res://tests/click_test.tscn -- --shots=<dir>
 
 var shots_dir := ""
@@ -129,4 +129,76 @@ func run() -> void:
 		await click_at(center_of(scene().get_node("HUD").get_child(scene().get_node("HUD").get_child_count() - 1)))
 		await frames(20)
 		expect(scene().name == "Title", "第2章で「タイトルへ」でタイトルに戻る")
+
+	# 第3章(テスト用ボタン)。謎の中も本物のクリックで操作する
+	var dbg3 = scene().find_child("debug_ch3", true, false)
+	expect(dbg3 != null, "第3章ボタンがある")
+	if dbg3:
+		await click_at(center_of(dbg3))
+		await frames(20)
+		await click_through_dialogue()
+		await frames(20)
+		expect(GameState.chapter == 3 and not scene().busy, "第3章で操作できる")
+		await click_at(center_of(hotspot("living_to_kitchen")))
+		await frames(60)
+		await click_at(center_of(hotspot("kitchen_to_parents")))
+		await click_through_dialogue()
+		await frames(60)
+		expect(GameState.room == "parents_room", "台所のドアから両親の部屋へ")
+		await click_at(center_of(hotspot("parents_toolbox")))
+		await click_through_dialogue()
+		var tag = scene().puzzle_node
+		expect(tag != null, "工具箱をクリックすると謎8が開く")
+		if tag:
+			# 板をクリックして正しい並びにする
+			for i in tag.order.size():
+				var j: int = tag.order.find(i)
+				if j != i:
+					await click_at(center_of(tag._boards[i]))
+					await click_at(center_of(tag._boards[j]))
+			await shot("c06_tag_solved")
+			expect(tag.is_solved, "板をクリックで並べて謎8が解ける")
+			await frames(90)
+			await click_through_dialogue()
+			expect(GameState.has_item("ear_tag"), "ふだを入手")
+		# 持ち物の ふだ を選んで、ゆかの とびらへ
+		var inv = scene().get_node("HUD/Inventory")
+		for b in inv.find_children("*", "BaseButton", true, false):
+			if b.get_meta("item", "") == "ear_tag":
+				await click_at(center_of(b))
+		expect(inv.selected == "ear_tag", "持ち物の ふだ を選べる")
+		await click_at(center_of(hotspot("parents_hatch")))
+		await click_through_dialogue()
+		await frames(60)
+		expect(GameState.room == "basement", "ふだを使って地下室へ")
+		await click_at(center_of(hotspot("basement_fences")))
+		await click_through_dialogue()
+		var fences = scene().puzzle_node
+		expect(fences != null, "柵をクリックすると謎9が開く")
+		if fences:
+			var e: int = fences.cells.find(fences.EMPTY)
+			var p: int = fences._neighbors(e)[0]
+			var before: int = fences.cells[p]
+			var cell: Vector2 = fences._board.global_position + (Vector2(p % 3, p / 3) + Vector2(0.5, 0.5)) * fences.CELL
+			await click_at(cell)
+			expect(fences.cells[e] == before, "区画をクリックで すべらせられる")
+			fences.solve_by_undo()
+			await frames(90)
+			await click_through_dialogue()
+		await click_at(center_of(hotspot("basement_trunk")))
+		await click_through_dialogue()
+		var letter = scene().puzzle_node
+		expect(letter != null, "トランクをクリックすると謎10が開く")
+		if letter:
+			var was: bool = letter.flipped[0]
+			await click_at(center_of(letter._strips[0]))
+			await click_at(center_of(letter._strips[0]))
+			expect(letter.flipped[0] != was, "切れはしを2回クリックで ひっくり返る")
+			await shot("c07_letter")
+			await click_at(center_of(letter.find_child("BackButton", true, false)))
+			await frames(10)
+			expect(scene().puzzle_node == null, "「もどる」で謎を閉じる")
+		await click_at(center_of(scene().get_node("HUD").get_child(scene().get_node("HUD").get_child_count() - 1)))
+		await frames(20)
+		expect(scene().name == "Title", "第3章で「タイトルへ」でタイトルに戻る")
 	GameState.delete_save()
