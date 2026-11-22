@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+
+[node name="Kitchen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+room_id = "kitchen"
+name_key = "ROOM_KITCHEN"
+wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
+floor_color = Color(0.86, 0.72, 0.55, 1)
+
+
+[node name="Window" type="Control" parent="."]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 260.0
+offset_right = 500.0
+offset_bottom = 580.0
+script = ExtResource("2")
+hotspot_id = "kitchen_window"
+label_key = "LBL_WINDOW"
+fill_color = Color(0.72, 0.87, 0.96, 1)
+
+[node name="Fridge" type="Control" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 240.0
+offset_right = 860.0
+offset_bottom = 780.0
+script = ExtResource("2")
+fill_color = Color(0.95, 0.95, 0.93, 1)
+
+[node name="Memo" type="Control" parent="."]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 330.0
+offset_right = 820.0
+offset_bottom = 450.0
+script = ExtResource("2")
+hotspot_id = "kitchen_memo"
+label_key = "LBL_MEMO"
+fill_color = Color(1, 0.93, 0.6, 1)
+
+[node name="Cupboard" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 200.0
+offset_right = 1380.0
+offset_bottom = 640.0
+script = ExtResource("2")
+hotspot_id = "kitchen_cupboard"
+label_key = "LBL_CUPBOARD"
+fill_color = Color(0.8, 0.62, 0.45, 1)
+
+[node name="Stove" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1460.0
+offset_top = 460.0
+offset_right = 1740.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "kitchen_stove"
+label_key = "LBL_STOVE"
+fill_color = Color(0.66, 0.66, 0.68, 1)
+
+[node name="Table" type="Control" parent="."]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 700.0
+offset_right = 1440.0
+offset_bottom = 900.0
+script = ExtResource("2")
+hotspot_id = "kitchen_table"
+label_key = "LBL_TABLE"
+fill_color = Color(0.72, 0.52, 0.36, 1)
+
+[node name="DoorLiving" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1770.0
+offset_top = 380.0
+offset_right = 1910.0
+offset_bottom = 780.0
+script = ExtResource("2")
+hotspot_id = "kitchen_to_living"
+label_key = "LBL_TO_LIVING"
+fill_color = Color(0.9, 0.78, 0.62, 1)
+shape = 2
+label_size = 24
+
+[node name="Moko" type="Control" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 640.0
+offset_right = 520.0
+offset_bottom = 960.0
+script = ExtResource("3")
