@@ -143,6 +143,10 @@ func run() -> void:
 	await shot("04_clock_puzzle")
 	clock.confirm()
 	expect(clock.is_solved, "6:40 で解ける")
+	await shot("04b_clock_poppo")
+	await get_tree().create_timer(1.3).timeout
+	await wait_text(60)
+	await shot("04c_poppo_talks")
 	await get_tree().create_timer(1.2).timeout
 	await wait_idle()
 	expect(GameState.has_item("kids_key"), "小さな鍵を入手")
@@ -172,7 +176,16 @@ func run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	expect(GameState.chapter == 2 and GameState.has_flag("chapter1_clear"), "第1章クリアで章が進む")
 
-	# 3) セーブ/ロード
+	# 3) 第2章の部屋(まだ入口はない)が読み込めて、2章の絵が出る
+	GameState.chapter = 2
+	var brother: Room = load(Story.ROOMS["brother_room"]).instantiate()
+	get_tree().root.add_child(brother)
+	await get_tree().process_frame
+	expect(brother.current_background() != null, "兄の部屋は2章の絵がある")
+	await shot("10_brother_room")
+	brother.queue_free()
+
+	# 4) セーブ/ロード
 	GameState.new_game()
 	expect(GameState.load_game(), "セーブを読み込める")
 	expect(GameState.chapter == 2 and GameState.has_flag("solved_books"), "読み込んだ内容が正しい")

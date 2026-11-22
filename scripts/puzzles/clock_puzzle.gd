@@ -100,5 +100,7 @@ func _draw_face() -> void:
 	var door := Rect2(c + Vector2(-34, -r - 70), Vector2(68, 56))
 	_face.draw_rect(door, Color(0.3, 0.2, 0.14) if not is_solved else Color(0.98, 0.9, 0.7))
 	if is_solved:
-		_face.draw_circle(door.get_center(), 20, Color(0.55, 0.62, 0.7))
-		_face.draw_circle(door.get_center() + Vector2(-6, -4), 4, INK)
+		# ポッポが ばねで とびだす
+		var poppo: Texture2D = load("res://assets/characters/poppo.png")
+		var sz := Vector2(170, 170)
+		_face.draw_texture_rect(poppo, Rect2(door.get_center() + Vector2(-sz.x * 0.5, -sz.y + 30), sz), false)

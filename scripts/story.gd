@@ -21,6 +21,7 @@ const ROOMS := {
 	"kitchen": "res://scenes/rooms/kitchen.tscn",
 	"living_room": "res://scenes/rooms/living_room.tscn",
 	"kids_room": "res://scenes/rooms/kids_room.tscn",
+	"brother_room": "res://scenes/rooms/brother_room.tscn",  # 第2章で入口をつなぐ
 }
 
 const PUZZLES := {
