@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://assets/characters/moko.png" id="4"]
 [ext_resource type="Texture2D" path="res://assets/rooms/living_room_ch1.png" id="bg1"]
 [ext_resource type="Texture2D" path="res://assets/rooms/living_room_ch2.png" id="bg2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/living_room_ch3.png" id="bg3"]
 
 [node name="LivingRoom" type="Control"]
 layout_mode = 3
@@ -19,7 +20,7 @@ room_id = "living_room"
 name_key = "ROOM_LIVING"
 wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
 floor_color = Color(0.8, 0.66, 0.52, 1)
-backgrounds = Array[Texture2D]([ExtResource("bg1"), ExtResource("bg2")])
+backgrounds = Array[Texture2D]([ExtResource("bg1"), ExtResource("bg2"), ExtResource("bg3")])
 
 
 [node name="DoorKitchen" type="Control" parent="."]

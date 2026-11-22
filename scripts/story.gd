@@ -23,6 +23,8 @@ const ROOMS := {
 	"living_room": "res://scenes/rooms/living_room.tscn",
 	"kids_room": "res://scenes/rooms/kids_room.tscn",
 	"brother_room": "res://scenes/rooms/brother_room.tscn",
+	"parents_room": "res://scenes/rooms/parents_room.tscn",
+	"basement": "res://scenes/rooms/basement.tscn",
 }
 
 const PUZZLES := {
@@ -33,6 +35,9 @@ const PUZZLES := {
 	"drawer": "res://scenes/puzzles/drawer_lock.tscn",
 	"window": "res://scenes/puzzles/window_puzzle.tscn",
 	"radio": "res://scenes/puzzles/radio_puzzle.tscn",
+	"tag": "res://scenes/puzzles/tag_puzzle.tscn",
+	"fences": "res://scenes/puzzles/fences_puzzle.tscn",
+	"letter": "res://scenes/puzzles/letter_puzzle.tscn",
 }
 
 ## 章の始めに流れる場面(前の章の終わりのあと、そのまま続く)
@@ -41,6 +46,11 @@ const CHAPTER_START := {
 		["say", "CH2_INTRO", ""],
 		["say", "CH2_INTRO_MOKO", "moko"],
 		["say", "CH2_INTRO_POPPO", "poppo"],
+	],
+	3: [
+		["say", "CH3_INTRO", ""],
+		["say", "CH3_INTRO_MOKO", "moko"],
+		["say", "CH3_INTRO_POPPO", "poppo"],
 	],
 }
 
@@ -53,6 +63,9 @@ const ITEMS := {
 	"radio_knob": "ITEM_RADIO_KNOB",
 	"ram_note": "ITEM_RAM_NOTE",
 	"marble": "ITEM_MARBLE",
+	"ear_tag": "ITEM_EAR_TAG",
+	"father_glasses": "ITEM_GLASSES",
+	"mother_ribbon": "ITEM_RIBBON",
 }
 
 const RULES := {
@@ -75,6 +88,7 @@ const RULES := {
 		{"do": [["say", "KITCHEN_TABLE", ""]]},
 	],
 	"kitchen_window": [
+		{"if": ["chapter>=3"], "do": [["say", "KITCHEN_WINDOW_CH3", ""]]},
 		{"if": ["chapter>=2"], "do": [["say", "KITCHEN_WINDOW_CH2", ""]]},
 		{"do": [["say", "KITCHEN_WINDOW", ""]]},
 	],
@@ -107,10 +121,12 @@ const RULES := {
 		{"do": [["say", "CLOCK_UNWOUND", ""]]},
 	],
 	"living_calendar": [
+		{"if": ["chapter>=3"], "do": [["say", "LIVING_CALENDAR_CH3", ""]]},
 		{"if": ["chapter>=2"], "do": [["say", "LIVING_CALENDAR_CH2", ""]]},
 		{"do": [["say", "LIVING_CALENDAR", ""]]},
 	],
 	"living_photo": [
+		{"if": ["chapter>=3"], "do": [["say", "LIVING_PHOTO_CH3", "moko"]]},
 		{"do": [["say", "LIVING_PHOTO", "moko"]]},
 	],
 	"living_sofa": [
@@ -267,6 +283,104 @@ const RULES := {
 			["end_chapter", 2],
 		]},
 	],
+
+	# ==== 第3章「ひみつの部屋」 ====
+	# ---- 台所: れいぞうこが倒れて、両親の部屋のドアが現れる ----
+	"kitchen_to_parents": [
+		{"if": ["parents_door_open"], "do": [["goto", "parents_room"]]},
+		{"do": [
+			["say", "PARENTS_DOOR_FOUND", ""],
+			["say", "PARENTS_DOOR_POPPO", "poppo"],
+			["set", "parents_door_open"],
+			["goto", "parents_room"],
+		]},
+	],
+
+	# ---- 両親の部屋: 謎8(とうさんの工具箱)・地下への とびら ----
+	"parents_to_kitchen": [
+		{"do": [["goto", "kitchen"]]},
+	],
+	"parents_toolbox": [
+		{"if": ["solved_tag"], "do": [["say", "TOOLBOX_EMPTY", ""]]},
+		{"do": [["say", "TOOLBOX_LOOK", ""], ["puzzle", "tag"]]},
+	],
+	"solved:tag": [
+		{"do": [
+			["set", "solved_tag"],
+			["say", "TAG_SOLVED", ""],
+			["say", "TAG_TRUTH", "moko"],
+			["give", "ear_tag"],
+			["say", "TAG_POPPO", "poppo"],
+			["say", "GLASSES_FOUND", ""],
+			["give", "father_glasses"],
+			["set", "found_glasses"],
+		]},
+	],
+	"parents_hatch": [
+		{"if": ["basement_open"], "do": [["goto", "basement"]]},
+		{"use": "ear_tag", "do": [
+			["take", "ear_tag"],
+			["set", "basement_open"],
+			["say", "HATCH_OPEN", ""],
+			["goto", "basement"],
+		]},
+		{"do": [["say", "HATCH_LOCKED", ""]]},
+	],
+	"parents_photo": [
+		{"do": [["say", "PARENTS_PHOTO", "moko"]]},
+	],
+	"parents_wardrobe": [
+		{"do": [["say", "PARENTS_WARDROBE", ""]]},
+	],
+	"parents_bed": [
+		{"do": [["say", "PARENTS_BED", "moko"]]},
+	],
+	"parents_mirror": [
+		{"do": [["say", "PARENTS_MIRROR", ""], ["say", "PARENTS_MIRROR_POPPO", "poppo"]]},
+	],
+
+	# ---- 地下室: 謎9(柵のスライド)・謎10(やぶれた手紙) ----
+	"basement_ladder": [
+		{"do": [["goto", "parents_room"]]},
+	],
+	"basement_fences": [
+		{"if": ["solved_fences"], "do": [["say", "FENCES_DONE", ""]]},
+		{"do": [["say", "FENCES_LOOK", ""], ["puzzle", "fences"]]},
+	],
+	"solved:fences": [
+		{"do": [
+			["set", "solved_fences"],
+			["say", "FENCES_SOLVED", ""],
+			["say", "FENCES_TRUTH", "moko"],
+		]},
+	],
+	"basement_trough": [
+		{"do": [["say", "BASEMENT_TROUGH", ""]]},
+	],
+	"basement_straw": [
+		{"if": ["found_ribbon"], "do": [["say", "STRAW_EMPTY", ""]]},
+		{"do": [
+			["say", "STRAW_LOOK", ""],
+			["give", "mother_ribbon"],
+			["set", "found_ribbon"],
+			["say", "RIBBON_MOKO", "moko"],
+		]},
+	],
+	"basement_trunk": [
+		{"if": ["solved_letter"], "do": [["say", "TRUNK_EMPTY", ""]]},
+		{"if": ["solved_fences"], "do": [["say", "TRUNK_OPEN", ""], ["puzzle", "letter"]]},
+		{"do": [["say", "TRUNK_BLOCKED", ""]]},
+	],
+	"solved:letter": [
+		{"do": [
+			["set", "solved_letter"],
+			["say", "LETTER_READ", ""],
+			["say", "LETTER_MOKO", "moko"],
+			["say", "LETTER_POPPO", "poppo"],
+			["say", "CH3_FINALE", ""],
+			["end_chapter", 3],
+		]},
+	],
 }
 
 ## ポッポのヒント。上から順に "until" のフラグが立っていない最初の段階を使う。
@@ -285,4 +399,9 @@ const HINTS := [
 	{"until": "solved_window", "keys": ["HINT_WINDOW_1", "HINT_WINDOW_2", "HINT_WINDOW_3"]},
 	{"until": "radio_fixed", "keys": ["HINT_KNOB_1", "HINT_KNOB_2", "HINT_KNOB_3"]},
 	{"until": "solved_radio", "keys": ["HINT_RADIO_1", "HINT_RADIO_2", "HINT_RADIO_3"]},
+	{"until": "parents_door_open", "keys": ["HINT_PDOOR_1", "HINT_PDOOR_2", "HINT_PDOOR_3"]},
+	{"until": "solved_tag", "keys": ["HINT_TAG_1", "HINT_TAG_2", "HINT_TAG_3"]},
+	{"until": "basement_open", "keys": ["HINT_HATCH_1", "HINT_HATCH_2", "HINT_HATCH_3"]},
+	{"until": "solved_fences", "keys": ["HINT_FENCES_1", "HINT_FENCES_2", "HINT_FENCES_3"]},
+	{"until": "solved_letter", "keys": ["HINT_LETTER_1", "HINT_LETTER_2", "HINT_LETTER_3"]},
 ]

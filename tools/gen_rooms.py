@@ -12,11 +12,13 @@ ROOMS = {
         "name_key": "ROOM_KITCHEN",
         "floor": "Color(0.86, 0.72, 0.55, 1)",
         "moko": (200, 640, 520, 960),
-        "backgrounds": ["res://assets/rooms/kitchen_ch1.png", "res://assets/rooms/kitchen_ch2.png"],
+        "backgrounds": ["res://assets/rooms/kitchen_ch1.png", "res://assets/rooms/kitchen_ch2.png", "res://assets/rooms/kitchen_ch3.png"],
         "spots": [
             ("Window", "kitchen_window", "LBL_WINDOW", (140, 260, 500, 580), "Color(0.72, 0.87, 0.96, 1)", "rect"),
-            ("Fridge", "", "", (600, 240, 860, 780), "Color(0.95, 0.95, 0.93, 1)", "rect"),
-            ("Memo", "kitchen_memo", "LBL_MEMO", (640, 330, 820, 450), "Color(1, 0.93, 0.6, 1)", "rect"),
+            ("Fridge", "", "", (600, 240, 860, 780), "Color(0.95, 0.95, 0.93, 1)", "rect", "!chapter>=3"),
+            ("Memo", "kitchen_memo", "LBL_MEMO", (640, 330, 820, 450), "Color(1, 0.93, 0.6, 1)", "rect", "!chapter>=3"),
+            # 3章: れいぞうこ(段ボールの絵)が倒れて、うしろにドアが現れる
+            ("DoorParents", "kitchen_to_parents", "LBL_TO_PARENTS", (620, 260, 840, 780), "Color(0.71, 0.54, 0.39, 1)", "door", "chapter>=3"),
             ("Cupboard", "kitchen_cupboard", "LBL_CUPBOARD", (1000, 200, 1380, 640), "Color(0.8, 0.62, 0.45, 1)", "rect"),
             ("Stove", "kitchen_stove", "LBL_STOVE", (1460, 460, 1740, 780), "Color(0.66, 0.66, 0.68, 1)", "rect"),
             ("Table", "kitchen_table", "LBL_TABLE", (880, 700, 1440, 900), "Color(0.72, 0.52, 0.36, 1)", "rect"),
@@ -27,7 +29,7 @@ ROOMS = {
         "name_key": "ROOM_LIVING",
         "floor": "Color(0.8, 0.66, 0.52, 1)",
         "moko": (300, 660, 620, 980),
-        "backgrounds": ["res://assets/rooms/living_room_ch1.png", "res://assets/rooms/living_room_ch2.png"],
+        "backgrounds": ["res://assets/rooms/living_room_ch1.png", "res://assets/rooms/living_room_ch2.png", "res://assets/rooms/living_room_ch3.png"],
         "spots": [
             ("DoorKitchen", "living_to_kitchen", "LBL_TO_KITCHEN", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Clock", "living_clock", "LBL_CLOCK", (260, 240, 520, 600), "Color(0.62, 0.42, 0.28, 1)", "rect"),
@@ -44,7 +46,7 @@ ROOMS = {
         "name_key": "ROOM_KIDS",
         "floor": "Color(0.88, 0.78, 0.62, 1)",
         "moko": (700, 700, 1000, 980),
-        "backgrounds": ["res://assets/rooms/kids_room_ch1.png", "res://assets/rooms/kids_room_ch2.png"],
+        "backgrounds": ["res://assets/rooms/kids_room_ch1.png", "res://assets/rooms/kids_room_ch2.png", "res://assets/rooms/kids_room_ch3.png"],
         "spots": [
             ("DoorLiving", "kids_to_living", "LBL_TO_LIVING", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Shelf", "kids_shelf", "LBL_SHELF", (300, 250, 700, 780), "Color(0.7, 0.5, 0.34, 1)", "rect"),
@@ -53,12 +55,12 @@ ROOMS = {
             ("Bed", "kids_bed", "LBL_BED", (1100, 640, 1800, 900), "Color(0.75, 0.85, 0.7, 1)", "rect"),
         ],
     },
-    # 第2章から入れる部屋(まだ入口はつないでいない)
+    # 第2章から入れる部屋(いまの青いドアから)
     "brother_room": {
         "name_key": "ROOM_BROTHER",
         "floor": "Color(0.77, 0.59, 0.44, 1)",
         "moko": (640, 700, 940, 980),
-        "backgrounds": [None, "res://assets/rooms/brother_room_ch2.png"],
+        "backgrounds": [None, "res://assets/rooms/brother_room_ch2.png", "res://assets/rooms/brother_room_ch3.png"],
         "spots": [
             ("DoorLiving", "brother_to_living", "LBL_TO_LIVING", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Pillar", "brother_pillar", "LBL_PILLAR", (260, 120, 380, 780), "Color(0.78, 0.58, 0.42, 1)", "rect"),
@@ -67,6 +69,35 @@ ROOMS = {
             ("Kite", "brother_kite", "LBL_KITE", (1480, 200, 1720, 440), "Color(0.97, 0.87, 0.55, 1)", "rect"),
             ("GiftBox", "brother_gift", "LBL_GIFT_BOX", (1000, 640, 1180, 780), "Color(0.96, 0.9, 0.79, 1)", "rect"),
             ("Bed", "brother_bed", "LBL_BED", (1300, 620, 1860, 900), "Color(0.48, 0.61, 0.78, 1)", "rect"),
+        ],
+    },
+    # 第3章から入れる部屋(台所の、れいぞうこの うしろの ドアから)
+    "parents_room": {
+        "name_key": "ROOM_PARENTS",
+        "floor": "Color(0.73, 0.6, 0.48, 1)",
+        "moko": (300, 720, 600, 1000),
+        "backgrounds": [None, None, "res://assets/rooms/parents_room_ch3.png"],
+        "spots": [
+            ("DoorKitchen", "parents_to_kitchen", "LBL_TO_KITCHEN", (10, 380, 160, 780), "Color(0.71, 0.54, 0.39, 1)", "door"),
+            ("Wardrobe", "parents_wardrobe", "LBL_WARDROBE", (240, 220, 520, 700), "Color(0.73, 0.51, 0.35, 1)", "rect"),
+            ("Photo", "parents_photo", "LBL_PHOTO", (620, 230, 860, 440), "Color(0.85, 0.71, 0.54, 1)", "rect"),
+            ("Toolbox", "parents_toolbox", "LBL_TOOLBOX", (600, 640, 940, 800), "Color(0.72, 0.36, 0.32, 1)", "rect"),
+            ("Bed", "parents_bed", "LBL_BED", (990, 560, 1560, 860), "Color(0.79, 0.71, 0.84, 1)", "rect"),
+            ("Mirror", "parents_mirror", "LBL_MIRROR", (1630, 250, 1870, 800), "Color(0.9, 0.88, 0.84, 1)", "rect"),
+            ("Hatch", "parents_hatch", "LBL_HATCH", (1050, 900, 1430, 1040), "Color(0.61, 0.48, 0.35, 1)", "rect"),
+        ],
+    },
+    "basement": {
+        "name_key": "ROOM_BASEMENT",
+        "floor": "Color(0.48, 0.39, 0.31, 1)",
+        "moko": (300, 720, 600, 1000),
+        "backgrounds": [None, None, "res://assets/rooms/basement_ch3.png"],
+        "spots": [
+            ("Ladder", "basement_ladder", "LBL_LADDER", (80, 60, 300, 720), "Color(0.62, 0.5, 0.38, 1)", "rect"),
+            ("Fences", "basement_fences", "LBL_FENCES", (520, 290, 1000, 760), "Color(0.79, 0.66, 0.47, 1)", "rect"),
+            ("Trough", "basement_trough", "LBL_TROUGH", (1100, 560, 1380, 720), "Color(0.61, 0.48, 0.35, 1)", "rect"),
+            ("Straw", "basement_straw", "LBL_STRAW", (1060, 770, 1400, 960), "Color(0.85, 0.76, 0.48, 1)", "rect"),
+            ("Trunk", "basement_trunk", "LBL_TRUNK", (1460, 570, 1800, 800), "Color(0.56, 0.42, 0.3, 1)", "rect"),
         ],
     },
 }

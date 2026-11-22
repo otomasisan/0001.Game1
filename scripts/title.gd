@@ -33,11 +33,7 @@ func _ready() -> void:
 	vb.position = Vector2(190, 480)
 	vb.add_theme_constant_override("separation", 20)
 	add_child(vb)
-	var ids := ["new", "continue", "language", "quit"]
-	# エディタやデバッグ書き出しのときだけ、第2章へ飛ぶ確認用ボタンを出す
-	if OS.is_debug_build():
-		ids.insert(2, "debug_ch2")
-	for id in ids:
+	for id in ["new", "continue", "language", "quit"]:
 		var b := Button.new()
 		b.name = id
 		b.custom_minimum_size = Vector2(440, 84)
@@ -45,6 +41,22 @@ func _ready() -> void:
 		b.pressed.connect(_on_button.bind(id))
 		vb.add_child(b)
 		_buttons[id] = b
+
+	# エディタやデバッグ書き出しのときだけ、途中の章へ飛ぶ確認用ボタンを右下に出す
+	if OS.is_debug_build():
+		var dbg := HBoxContainer.new()
+		dbg.name = "DebugButtons"
+		dbg.position = Vector2(1100, 980)
+		dbg.add_theme_constant_override("separation", 16)
+		add_child(dbg)
+		for n in [2, 3]:
+			var b := Button.new()
+			b.name = "debug_ch%d" % n
+			b.custom_minimum_size = Vector2(340, 64)
+			b.add_theme_font_size_override("font_size", 26)
+			b.pressed.connect(_debug_start.bind(n))
+			dbg.add_child(b)
+			_buttons[b.name] = b
 
 	var ver := Label.new()
 	ver.text = "v%s  prototype" % ProjectSettings.get_setting("application/config/version", "0.1.0")
@@ -64,8 +76,9 @@ func _refresh() -> void:
 	_buttons["continue"].disabled = not GameState.has_save()
 	_buttons["language"].text = tr("UI_LANGUAGE")
 	_buttons["quit"].text = tr("UI_QUIT")
-	if _buttons.has("debug_ch2"):
-		_buttons["debug_ch2"].text = tr("UI_DEBUG_CH2")
+	for n in [2, 3]:
+		if _buttons.has("debug_ch%d" % n):
+			_buttons["debug_ch%d" % n].text = tr("UI_DEBUG_CH").format({"n": n})
 
 
 func _on_button(id: String) -> void:
@@ -73,10 +86,6 @@ func _on_button(id: String) -> void:
 		"new":
 			GameState.delete_save()
 			GameState.new_game()
-			get_tree().change_scene_to_file("res://scenes/main.tscn")
-		"debug_ch2":
-			GameState.debug_start_chapter(2)
-			GameState.set_meta("pending_start", Story.CHAPTER_START.get(2, []))
 			get_tree().change_scene_to_file("res://scenes/main.tscn")
 		"continue":
 			if GameState.load_game():
@@ -86,3 +95,10 @@ func _on_button(id: String) -> void:
 			_refresh()
 		"quit":
 			get_tree().quit()
+
+
+## 確認用: 前の章を解き終えた状態から、n 章を始める
+func _debug_start(n: int) -> void:
+	GameState.debug_start_chapter(n)
+	GameState.set_meta("pending_start", Story.CHAPTER_START.get(n, []))
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

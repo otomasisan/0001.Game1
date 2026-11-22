@@ -58,3 +58,14 @@ for r in kitchen living_room kids_room; do node tools/render_svg.js art/src/${r}
 - 台所・子ども部屋: 窓の外が夕焼けに、部屋全体に夕方の色
 - 居間: 夕方の色に加えて、つるが伸び、ソファにダイヤルの小箱(謎4)が現れる
 - ラムの部屋は2章から入れるので、2章の絵だけ(`brother_room_ch2.svg`)
+
+3章(ひみつの部屋)の絵は `tools/gen_ch3_art.py` が作ります。
+
+```
+python3 tools/gen_ch3_art.py
+for r in kitchen living_room kids_room brother_room parents_room basement; do node tools/render_svg.js art/src/${r}_ch3.svg assets/rooms/${r}_ch3.png; done
+```
+
+- 台所・居間・子ども部屋・ラムの部屋: 前の章の絵の色をうすくして(灰色)、壁紙のはがれ(下に段ボールと板)と床の藁を足す
+- 台所: れいぞうこ(段ボールに描いた絵)が倒れて、うしろに両親の部屋のドアが現れる
+- 両親の部屋・地下室は3章から入れる新しい部屋。絵はスクリプトの中にある(`PARENTS` / `BASEMENT`)

@@ -5,7 +5,7 @@ UI_NEW_GAME,はじめから,New Game
 UI_CONTINUE,つづきから,Continue
 UI_LANGUAGE,Language: 日本語,言語: English
 UI_QUIT,おわる,Quit
-UI_DEBUG_CH2,第2章から(テスト用),Chapter 2 (test)
+UI_DEBUG_CH,第{n}章から(テスト用),Chapter {n} (test)
 UI_TO_TITLE,タイトルへ,Title
 UI_HINT,ポッポに きく,Ask Poppo
 UI_USING,つかう: {item}(しらべる ばしょを クリック),Using: {item} (click where to use it)
@@ -73,7 +73,7 @@ KIDS_WINDOW,まどが まっしろに くもっていて、そとが みえな�
 BOOKS_SOLVED,せびょうしの もじが ならんだ。『ま』『っ』『て』『て』。,"The letters on the spines line up: W, A, I, T."
 BOOKS_POPPO,まってて、だって。|……うん。いい子で まっていようね、モコ。そとは、みなくて いいんだよ。,"""Wait,"" it says.|...Right. Let's be good and wait, Moko. You don't need to look outside."
 CHAPTER_END_1,だい1しょう おるすばんの あさ\n\nゆうがたに なっても、だれも かえってこなかった。,"Chapter 1: A Morning Alone\n\nEvening came, and still no one came home."
-DEMO_END,プロトタイプは ここまでです。あそんでくれて ありがとう!|だい3しょう『ひみつの へや』は せいさくちゅう です。,"That's the end of the prototype. Thanks for playing!|Chapter 3, ""The Secret Rooms,"" is in the works."
+DEMO_END,プロトタイプは ここまでです。あそんでくれて ありがとう!|だい4しょう『おかえり』は せいさくちゅう です。,"That's the end of the prototype. Thanks for playing!|Chapter 4, ""Welcome Home,"" is in the works."
 ITEM_BROTHER_KEY,ラムの へやの かぎ,key to Ram's room
 ITEM_RADIO_KNOB,ラジオの つまみ,radio knob
 ITEM_RAM_NOTE,ラムの メモ,Ram's note
@@ -199,3 +199,91 @@ BOOK_SPINE_MORNING,ま,W
 BOOK_SPINE_NOON,っ,A
 BOOK_SPINE_EVENING,て,I
 BOOK_SPINE_NIGHT,て,T
+ROOM_PARENTS,とうさんと かあさんの へや,Mama and Papa's Room
+ROOM_BASEMENT,ちかしつ,Cellar
+LBL_TO_PARENTS,ドア?,A door?
+LBL_WARDROBE,ようふくだんす,Wardrobe
+LBL_TOOLBOX,どうぐばこ,Toolbox
+LBL_MIRROR,かがみ,Mirror
+LBL_HATCH,ゆかの とびら,Trapdoor
+LBL_LADDER,はしご,Ladder
+LBL_FENCES,さく,Fences
+LBL_TROUGH,おけ,Trough
+LBL_STRAW,わら,Straw
+LBL_TRUNK,トランク,Trunk
+ITEM_EAR_TAG,きいろい ふだ No.0217,yellow tag No.0217
+ITEM_GLASSES,とうさんの めがね,Papa's glasses
+ITEM_RIBBON,かあさんの リボン,Mama's ribbon
+CH3_INTRO,よるが あけた。でも、あさの ひかりは はいいろ だった。|かべがみが あちこち めくれて、したから ちゃいろい かみが のぞいている。|ゆかには、わらが ちらばっていた。,"Night ended. But the morning light was gray.|The wallpaper has peeled in places, showing brown paper underneath.|There's straw scattered on the floor."
+CH3_INTRO_MOKO,ゆうべの おさら……だれが もってきたんだろう。|だいどころで、なにかが たおれる おとが したよ。,Last night's plate... who brought it?|I heard something fall over in the kitchen.
+CH3_INTRO_POPPO,モコ、きょうは おへやで じっと してようよ。かべなんか みなくて いいから。,"Moko, let's just stay put today. You don't need to look at the walls."
+KITCHEN_WINDOW_CH3,まどの えが はがれかけている。うしろは いたの かべ。すきまから つめたい かぜ。,The window picture is peeling. Behind it is a plank wall. A cold draft slips through the cracks.
+LIVING_PHOTO_CH3,しゃしんの みんなの みみに、きいろい ふだ。|……まえから ついてたっけ?,"In the photo, everyone has a yellow tag in their ear.|...Were those always there?"
+LIVING_CALENDAR_CH3,カレンダーの ひにちが ぜんぶ はいいろに なっている。どの ひが きょう なのか わからない。,Every date on the calendar has gone gray. I can't tell which day is today.
+PARENTS_DOOR_FOUND,れいぞうこが ぱたんと たおれていた。……れいぞうこは、だんボールに かいた え だった。|そのうしろに、ドアが ある。『とうさんと かあさんの へや』。,"The fridge has toppled over. ...It was only a picture painted on cardboard.|Behind it is a door. ""Mama and Papa's Room."""
+PARENTS_DOOR_POPPO,そこは はいっちゃ だめな へや だよ。……ねえ、モコ。,"That room is off limits. ...Moko, hey."
+TOOLBOX_LOOK,とうさんの どうぐばこ。そこの いたが ばらばらに はずれている。,Papa's toolbox. The boards at the bottom have come loose.
+TOOLBOX_EMPTY,どうぐばこは もう からっぽ。,The toolbox is empty now.
+TAG_TITLE,どうぐばこの そこ,Bottom of the Toolbox
+TAG_HELP,いたを 2まい クリックすると いれかわるよ。えが つながるように ならべよう。,Click two boards to swap them. Line them up so the picture connects.
+TAG_SOLVED_STATUS,No.0217,No.0217
+TAG_SOLVED,いたの したに、きいろい ふだが かくしてあった。『No.0217』。|とうさんの みみに ついていた ふだと おなじ かたち。,"Under the boards, a yellow tag was hidden. ""No.0217.""|The same shape as the tag on Papa's ear."
+TAG_TRUTH,とうさんの なまえは……0217?|ちがうよ。とうさんは とうさん だよ。,Papa's name is... 0217?|No. Papa is Papa.
+TAG_POPPO,そんな ふだ、しまっておこうよ。ね?,Let's put that tag away. Okay?
+GLASSES_FOUND,ふだの うらに、とうさんの めがねが はさまっていた。,Papa's glasses were tucked behind the tag.
+HATCH_LOCKED,ゆかに とびら。みみの ふだの かたちの くぼみが ある。,A door in the floor. There's a dent shaped like an ear tag.
+HATCH_OPEN,ふだを はめると、カチリ。とびらの したに はしごが のびている。,The tag fits with a click. A ladder leads down below.
+PARENTS_PHOTO,とうさんと かあさんの しゃしん。ふたりとも みみに きいろい ふだ。|しゃしんの すみに、ちいさな にんげんの ゆびが うつっている。,"A photo of Mama and Papa. Both have yellow tags in their ears.|In the corner, a small human finger is in the shot."
+PARENTS_WARDROBE,かあさんの えりまきが すこし はみだしている。もう においは しない。,Mama's scarf is sticking out a little. It doesn't smell like her anymore.
+PARENTS_BED,ふたりの ベッド。まくらに わらが ついている。,Their bed. There's straw stuck to the pillows.
+PARENTS_MIRROR,ぬのが かけられた かがみ。,A mirror with a cloth draped over it.
+PARENTS_MIRROR_POPPO,それは めくらないで。おねがい。,Don't lift that. Please.
+FENCES_LOOK,いたの さくが いりくんでいる。さくには ずめんが かかっている。,Wooden fences tangle together. A plan is hanging on them.
+FENCES_DONE,さくの みちは もう つながっている。,The path through the fences is open now.
+FENCES_TITLE,さくの ずめん,The Fence Plan
+FENCES_HELP,あいている ところの となりを クリックすると すべるよ。みちを つなげよう。,Click a pen next to the empty spot to slide it. Connect the path.
+FENCE_KIDS,こどもべや,kids
+FENCE_LIVING,いま,living
+FENCE_BROTHER,ラム,Ram
+FENCE_KITCHEN,だいどころ,kitchen
+FENCE_HALL,ろうか,hall
+FENCE_PARENTS,おやの へや,parents
+FENCE_DOOR,げんかん,front door
+FENCE_BASEMENT,ちかしつ,cellar
+FENCES_SOLVED,さくが うごいて、トランクへの みちが ひらいた。|ずめんの くぎりには、こどもの じで『だいどころ』『いま』『こどもべや』……。,"The fences shift, and a path to the trunk opens.|Each pen on the plan is labeled in a child's handwriting: ""kitchen,"" ""living,"" ""kids""..."
+FENCES_TRUTH,うちの まどりと おなじ……。|うちの へやは、さくで くぎった ところ だったの?,It's the same as our house...|Were our rooms just pens marked off with fences?
+BASEMENT_TROUGH,ほしくさの はいった おけ。おなかが すいた においが する。,A trough full of hay. It smells like suppertime.
+STRAW_LOOK,わらの やまを かきわけると、ピンクの リボンが でてきた。,"Digging through the straw, a pink ribbon turns up."
+STRAW_EMPTY,ただの わらの やま。,Just a pile of straw.
+RIBBON_MOKO,かあさんが いつも つけていた リボン……。,The ribbon Mama always wore...
+TRUNK_BLOCKED,おくに トランクが ある。でも さくが じゃまで ちかづけない。,"There's a trunk at the back, but the fences are in the way."
+TRUNK_OPEN,トランクの なかに、こまかく やぶれた てがみ。かあさんの じ だ。,"Inside the trunk, a letter torn into strips. It's Mama's handwriting."
+TRUNK_EMPTY,トランクは からっぽ。,The trunk is empty.
+LETTER_TITLE,やぶれた てがみ,The Torn Letter
+LETTER_HELP,2まい クリックで いれかえ。おなじ きれはしを 2かい クリックで ひっくりかえす。,Click two strips to swap. Click the same strip twice to flip it.
+LETTER_LINE_1,モコへ。おるすばん させて ごめんね。,Dear Moko. I'm sorry to leave you home alone.
+LETTER_LINE_2,とうさんも ラムも、さきに いきました。,Papa and Ram have already gone ahead.
+LETTER_LINE_3,あした、かあさんも トラックに のります。,"Tomorrow, I'll get on the truck too."
+LETTER_LINE_4,でも あなたは、ここに のこれるの。,But you get to stay here.
+LETTER_LINE_5,ミナちゃんが、ないて おねがい してくれたから。,Because Mina cried and begged for you.
+LETTER_LINE_6,いい子で まっていてね。だいすきよ。 かあさん,"Be good, and wait. I love you. —Mama"
+LETTER_READ,モコへ。おるすばん させて ごめんね。|とうさんも ラムも、さきに いきました。あした、かあさんも トラックに のります。|でも あなたは、ここに のこれるの。ミナちゃんが、ないて おねがい してくれたから。|いい子で まっていてね。だいすきよ。 かあさん,"Dear Moko. I'm sorry to leave you home alone.|Papa and Ram have already gone ahead. Tomorrow, I'll get on the truck too.|But you get to stay here. Because Mina cried and begged for you.|Be good, and wait. I love you. —Mama"
+LETTER_MOKO,トラック……。|『すぐに かえる』って、かいて あったのに。,"The truck...|But the note said ""back soon."""
+LETTER_POPPO,……モコ。もう いいよ。うえに もどって、また まっていようよ。|まっていれば、きっと かえってくるから。,"...Moko. That's enough. Let's go back up and wait some more.|If we wait, they'll come home. I'm sure of it."
+CH3_FINALE,ちかしつの うえで、だれかが あるく おとが した。|かぞくの あしおと じゃない。もっと かるくて、すこし ためらう ような。,"Footsteps sounded above the cellar.|Not the family's. Lighter, and a little hesitant."
+CHAPTER_END_3,だい3しょう ひみつの へや\n\nモコは てがみを だいて、ずっと うえを みあげていた。,Chapter 3: The Secret Rooms\n\nMoko held the letter close and kept looking up.
+HINT_PDOOR_1,だいどころで なにか たおれた おとが したよ。,Something fell over in the kitchen.
+HINT_PDOOR_2,れいぞうこの あった ところを みてごらん。,Look where the fridge used to be.
+HINT_PDOOR_3,だいどころの、れいぞうこの うしろの ドアを クリック。……ほんとは いかなくて いいんだよ。,Click the door behind the fridge in the kitchen. ...You really don't have to go.
+HINT_TAG_1,とうさんの どうぐばこを しらべてみて。,Try looking at Papa's toolbox.
+HINT_TAG_2,いたに かかれた ふだの かたちと、なみなみの せんが つながるように。,Line up the boards so the tag outline and the wavy line connect.
+HINT_TAG_3,ひもの あなが ひだりはし。ばんごうは 0・2・1・7 の じゅん。,"The string hole goes on the far left. The numbers read 0, 2, 1, 7."
+HINT_HATCH_1,ゆかの とびらに、なにか はまりそうな くぼみが あるね。,There's a dent in the trapdoor where something might fit.
+HINT_HATCH_2,くぼみは、みみの ふだの かたち。,The dent is shaped like an ear tag.
+HINT_HATCH_3,もちものの きいろい ふだを えらんで、ゆかの とびらを クリック。,"Select the yellow tag in your items, then click the trapdoor."
+HINT_FENCES_1,ちかしつの さくを しらべてみて。,Take a look at the fences in the cellar.
+HINT_FENCES_2,あかい みちが はしまで ぜんぶ つながるように すべらせて。,Slide the pens so the red path connects all the way through.
+HINT_FENCES_3,うえの だんは こどもべや・いま・ラム。まんなかは だいどころ・ろうか・おやの へや。したは げんかん・ちかしつ・あき。,"Top row: kids, living, Ram. Middle: kitchen, hall, parents. Bottom: front door, cellar, empty."
+HINT_LETTER_1,おくの トランクを しらべてみて。,Check the trunk at the back.
+HINT_LETTER_2,ちぎれた ふちの ぎざぎざが ぴったり あうように。さかさまの きれはしは 2かい クリック。,Match the jagged torn edges. Click an upside-down strip twice to flip it.
+HINT_LETTER_3,『モコへ』で はじまり、『かあさん』で おわるよ。……よまなくても いいのに。,"It starts with ""Dear Moko"" and ends with ""Mama."" ...You don't have to read it."

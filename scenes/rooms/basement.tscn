@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/characters/moko.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/rooms/basement_ch3.png" id="bg3"]
+
+[node name="Basement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+room_id = "basement"
+name_key = "ROOM_BASEMENT"
+wall_colors = Array[Color]([Color(0.99, 0.94, 0.86, 1), Color(0.98, 0.82, 0.68, 1), Color(0.82, 0.8, 0.78, 1), Color(0.9, 0.84, 0.62, 1)])
+floor_color = Color(0.48, 0.39, 0.31, 1)
+backgrounds = Array[Texture2D]([null, null, ExtResource("bg3")])
+
+
+[node name="Ladder" type="Control" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 720.0
+script = ExtResource("2")
+hotspot_id = "basement_ladder"
+label_key = "LBL_LADDER"
+fill_color = Color(0.62, 0.5, 0.38, 1)
+
+[node name="Fences" type="Control" parent="."]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 290.0
+offset_right = 1000.0
+offset_bottom = 760.0
+script = ExtResource("2")
+hotspot_id = "basement_fences"
+label_key = "LBL_FENCES"
+fill_color = Color(0.79, 0.66, 0.47, 1)
+
+[node name="Trough" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 560.0
+offset_right = 1380.0
+offset_bottom = 720.0
+script = ExtResource("2")
+hotspot_id = "basement_trough"
+label_key = "LBL_TROUGH"
+fill_color = Color(0.61, 0.48, 0.35, 1)
+
+[node name="Straw" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 770.0
+offset_right = 1400.0
+offset_bottom = 960.0
+script = ExtResource("2")
+hotspot_id = "basement_straw"
+label_key = "LBL_STRAW"
+fill_color = Color(0.85, 0.76, 0.48, 1)
+
+[node name="Trunk" type="Control" parent="."]
+layout_mode = 0
+offset_left = 1460.0
+offset_top = 570.0
+offset_right = 1800.0
+offset_bottom = 800.0
+script = ExtResource("2")
+hotspot_id = "basement_trunk"
+label_key = "LBL_TRUNK"
+fill_color = Color(0.56, 0.42, 0.3, 1)
+
+[node name="Moko" type="Control" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 720.0
+offset_right = 600.0
+offset_bottom = 1000.0
+script = ExtResource("3")
+texture = ExtResource("4")
