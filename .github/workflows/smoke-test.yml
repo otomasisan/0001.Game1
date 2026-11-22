@@ -12,6 +12,8 @@ jobs:
       GODOT_VERSION: 4.3-stable
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: Download Godot
         run: |
           curl -sSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip"

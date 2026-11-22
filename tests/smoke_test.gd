@@ -90,6 +90,13 @@ func run() -> void:
 	await wait_idle()
 	expect(GameState.room == "kitchen", "台所から始まる")
 	await shot("02_kitchen")
+	var memo: Hotspot = main.room_node.get_node("Memo")
+	expect(memo.art_mode, "背景の絵がある部屋では仮の図形を描かない")
+	memo._hover = true
+	memo.queue_redraw()
+	await shot("02b_kitchen_hover")
+	memo._hover = false
+	memo.queue_redraw()
 
 	main.show_hint()
 	await wait_idle()

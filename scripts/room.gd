@@ -11,6 +11,8 @@ signal hotspot_pressed(hotspot_id: String)
 @export var wall_colors: Array[Color] = [Color(0.99, 0.94, 0.86)]
 @export var floor_color: Color = Color(0.86, 0.72, 0.55)
 @export var floor_height: float = 300.0
+## 章ごとの背景の絵(1章, 2章, ...)。空や null の章は仮の塗り(wall_colors)で描く
+@export var backgrounds: Array[Texture2D] = []
 
 
 func _ready() -> void:
@@ -19,7 +21,23 @@ func _ready() -> void:
 		return
 	for h in find_children("*", "Hotspot", true, false):
 		(h as Hotspot).pressed.connect(func(id: String): hotspot_pressed.emit(id))
-	GameState.changed.connect(queue_redraw)
+	GameState.changed.connect(_refresh_art)
+	_refresh_art()
+
+
+## 背景の絵がある章では、クリック場所の仮の図形を消して「なぞったときだけ光る」表示にする
+func _refresh_art() -> void:
+	var has_art := current_background() != null
+	for h in find_children("*", "Hotspot", true, false):
+		(h as Hotspot).art_mode = has_art
+	queue_redraw()
+
+
+func current_background() -> Texture2D:
+	var idx := _chapter() - 1
+	if idx >= 0 and idx < backgrounds.size():
+		return backgrounds[idx]
+	return null
 
 
 func _chapter() -> int:
@@ -27,6 +45,10 @@ func _chapter() -> int:
 
 
 func _draw() -> void:
+	var bg := current_background()
+	if bg:
+		draw_texture_rect(bg, Rect2(0, 0, 1920, 1080), false)
+		return
 	var idx := clampi(_chapter() - 1, 0, max(wall_colors.size() - 1, 0))
 	var wall: Color = wall_colors[idx] if wall_colors.size() > 0 else Color.WHITE
 	var w := 1920.0

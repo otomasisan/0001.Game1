@@ -2,7 +2,8 @@
 * text=auto eol=lf
 
 # Art and audio go to Git LFS (run `git lfs install` once)
-*.png filter=lfs diff=lfs merge=lfs -text
+# *.png はいったん通常の Git で管理(作業環境から LFS に送れないため。素材が増えたら LFS に戻す)
+*.png binary
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.kra filter=lfs diff=lfs merge=lfs -text
 *.clip filter=lfs diff=lfs merge=lfs -text
