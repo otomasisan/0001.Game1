@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/puzzles/code_lock_puzzle.gd" id="1"]
+
+[node name="DrawerLock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+title_key = "DRAWER_TITLE"
+help_key = "DRAWER_HELP"
+note_key = "DRAWER_NOTE"
+wheel_labels = PackedStringArray("DRAWER_WHEEL_RAM", "DRAWER_WHEEL_MOKO")
+wheel_min = 0
+wheel_max = 9
+answer = Array[int]([4, 5])

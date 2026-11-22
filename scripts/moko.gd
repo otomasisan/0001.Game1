@@ -7,6 +7,15 @@ extends Control
 @export var texture: Texture2D
 
 var _t := 0.0
+var _fade: Tween
+
+
+## 会話ウィンドウと重ならないよう、会話中はそっと消して、終わったら戻す
+func set_hidden_by_dialogue(hidden: bool) -> void:
+	if _fade:
+		_fade.kill()
+	_fade = create_tween()
+	_fade.tween_property(self, "modulate:a", 0.0 if hidden else 1.0, 0.2)
 
 
 func _ready() -> void:

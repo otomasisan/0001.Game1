@@ -1,5 +1,5 @@
 extends Node
-## 第1章を最初から最後まで自動で遊ぶ通しテスト。
+## 第1章と第2章を最初から最後まで自動で遊ぶ通しテスト。
 ##   godot --headless --path . res://tests/smoke_test.tscn
 ## 画面つきで起動し "-- --shots=<dir>" を付けると、要所でスクリーンショットを保存する。
 
@@ -176,18 +176,95 @@ func run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	expect(GameState.chapter == 2 and GameState.has_flag("chapter1_clear"), "第1章クリアで章が進む")
 
-	# 3) 第2章の部屋(まだ入口はない)が読み込めて、2章の絵が出る
-	GameState.chapter = 2
-	var brother: Room = load(Story.ROOMS["brother_room"]).instantiate()
-	get_tree().root.add_child(brother)
-	await get_tree().process_frame
-	expect(brother.current_background() != null, "兄の部屋は2章の絵がある")
-	await shot("10_brother_room")
-	brother.queue_free()
+	# 3) 第2章: 第1章のあとそのまま続く
+	expect(main.get_node("Dialogue").is_active() == false and GameState.room == "kids_room", "第1章のあと子ども部屋で第2章が始まる")
+	await shot("10_ch2_kids_room")
+	# 会話中は部屋のモコが消えて、会話ウィンドウと重ならない
+	main.on_hotspot("kids_bed")
+	await wait_text(30)
+	var moko: CanvasItem = main.room_node.get_node("Moko")
+	expect(moko.modulate.a < 0.05, "会話中は部屋のモコを隠す")
+	await shot("10b_dialogue_no_overlap")
+	await wait_idle()
+	await wait_text(30)
+	expect(moko.modulate.a > 0.95, "会話が終わるとモコが戻る")
+
+	# 謎6: くもった窓
+	await click("kids_window")
+	var win = main.puzzle_node
+	expect(win != null, "謎6(くもった窓)が開く")
+	expect(not win.is_sorted(), "窓の文字は最初はばらばら")
+	await shot("11_window_puzzle")
+	win.solve_by_swaps()
+	expect(win.is_solved, "窓の文字を並べて解ける")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle()
+	expect(GameState.has_flag("solved_window") and GameState.chapter == 2, "謎6だけでは章は終わらない")
+
+	# 謎4: 居間の小箱
+	await click("kids_to_living")
+	await shot("12_living_ch2")
+	await click("living_to_brother")
+	expect(GameState.room == "living_room", "兄の部屋は最初は開かない")
+	await click("living_radio")
+	expect(main.puzzle_node == null, "つまみがないとラジオは回せない")
+	await click("living_box")
+	var box = main.puzzle_node
+	expect(box != null, "謎4(小箱)が開く")
+	box.set_values([3, 17, 23])
+	box.try_open()
+	expect(not box.is_solved, "まちがった日付では開かない")
+	box.set_values([3, 17, 24])
+	await shot("13_box_puzzle")
+	box.try_open()
+	expect(box.is_solved, "カレンダーの日付で小箱が開く")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle()
+	expect(GameState.has_item("brother_key"), "兄の部屋の鍵を入手")
+
+	# 謎5: 兄の部屋の引き出し
+	await click("living_to_brother")
+	expect(GameState.room == "brother_room" and not GameState.has_item("brother_key"), "兄の部屋に入る")
+	await click("brother_pillar")
+	await shot("14_brother_room")
+	await click("brother_desk")
+	var drawer = main.puzzle_node
+	expect(drawer != null, "謎5(引き出し)が開く")
+	drawer.set_values([4, 5])
+	await shot("15_drawer_puzzle")
+	drawer.try_open()
+	expect(drawer.is_solved, "柱の背比べの数字で引き出しが開く")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle()
+	expect(GameState.has_item("radio_knob") and GameState.has_item("marble"), "つまみとビー玉を入手")
+
+	# 謎7: ラジオ
+	await click("brother_to_living")
+	main.get_node("HUD/Inventory").selected = "radio_knob"
+	await click("living_radio")
+	var radio = main.puzzle_node
+	expect(radio != null and GameState.has_flag("radio_fixed"), "つまみを付けてラジオが開く")
+	radio.listen_now()
+	expect(not radio.is_solved, "雑音の多い周波数では聞こえない")
+	radio.set_pos(radio.TARGET)
+	await shot("16_radio_puzzle")
+	radio.listen_now()
+	expect(radio.is_solved, "85.5MHz で放送が聞こえる")
+	await get_tree().create_timer(1.2).timeout
+	await wait_idle(4000)
+	await wait_text(200)
+	await shot("17_chapter2_end")
+	await wait_idle(4000)
+	await get_tree().create_timer(0.5).timeout
+	expect(GameState.chapter == 3 and GameState.has_flag("chapter2_clear"), "第2章クリアで章が進む")
+
+	# デバッグ用: 第2章からすぐ始められる
+	GameState.debug_start_chapter(2)
+	expect(GameState.chapter == 2 and GameState.room == "kids_room" and GameState.has_flag("solved_books"), "第2章から始める確認用の状態")
 
 	# 4) セーブ/ロード
 	GameState.new_game()
 	expect(GameState.load_game(), "セーブを読み込める")
-	expect(GameState.chapter == 2 and GameState.has_flag("solved_books"), "読み込んだ内容が正しい")
+	expect(GameState.chapter == 3 and GameState.has_flag("solved_radio"), "読み込んだ内容が正しい")
 	await shot("09_title")
 	GameState.delete_save()

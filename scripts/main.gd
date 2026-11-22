@@ -26,6 +26,7 @@ func _ready() -> void:
 	_dialogue = DialogueBox.new()
 	_dialogue.name = "Dialogue"
 	add_child(_dialogue)
+	_dialogue.active_changed.connect(_on_dialogue_active)
 	_fade = ColorRect.new()
 	_fade.color = Color(0.1, 0.08, 0.06, 0.0)
 	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -34,7 +35,11 @@ func _ready() -> void:
 
 	GameState.changed.connect(_refresh_hud)
 	_load_room(GameState.room)
-	if not GameState.has_flag("intro_done"):
+	if GameState.has_meta("pending_start"):
+		var start: Array = GameState.get_meta("pending_start")
+		GameState.remove_meta("pending_start")
+		run_actions(start)
+	elif not GameState.has_flag("intro_done"):
 		run_actions([["say", "INTRO", ""], ["say", "INTRO_MOKO", "moko"], ["set", "intro_done"]])
 
 
@@ -111,8 +116,16 @@ func _load_room(room_id: String) -> void:
 	room_node = (load(Story.ROOMS[room_id]) as PackedScene).instantiate() as Room
 	room_node.hotspot_pressed.connect(on_hotspot)
 	_room_layer.add_child(room_node)
+	_on_dialogue_active(_dialogue.is_active())
 	GameState.room = room_id
 	_refresh_hud()
+
+
+## 会話中は部屋のモコを隠す(会話ウィンドウとモコが重なるため)
+func _on_dialogue_active(active: bool) -> void:
+	var moko := room_node.get_node_or_null("Moko") as Moko if room_node else null
+	if moko:
+		moko.set_hidden_by_dialogue(active)
 
 
 func change_room(room_id: String) -> void:
@@ -155,8 +168,12 @@ func find_rule(rule_id: String, selected_item: String = "") -> Dictionary:
 	return {}
 
 
+var _run_depth := 0
+
+
 func run_actions(actions: Array) -> void:
 	busy = true
+	_run_depth += 1
 	for a in actions:
 		match String(a[0]):
 			"say":
@@ -178,9 +195,13 @@ func run_actions(actions: Array) -> void:
 				open_puzzle(a[1])
 			"end_chapter":
 				await _end_chapter(int(a[1]))
+			"run":
+				await run_actions(find_rule(a[1]).get("do", []))
 			_:
 				push_error("知らないアクション: %s" % a[0])
-	busy = false
+	_run_depth -= 1
+	if _run_depth == 0:
+		busy = false
 
 
 # --- 謎 ---------------------------------------------------------------------------
@@ -255,12 +276,24 @@ func _end_chapter(chapter: int) -> void:
 	t.tween_property(card, "color:a", 1.0, 1.2)
 	t.tween_property(label, "modulate:a", 1.0, 1.0)
 	await t.finished
+	await get_tree().create_timer(2.5).timeout
 	GameState.chapter = chapter + 1
 	GameState.set_flag("chapter%d_clear" % chapter)
 	GameState.save_game()
-	move_child(_dialogue, -1)
-	await _dialogue.show_key("DEMO_END")
-	get_tree().change_scene_to_file("res://scenes/title.tscn")
+	var next: Array = Story.CHAPTER_START.get(chapter + 1, [])
+	if next.is_empty():
+		# まだ作っていない章: プロトタイプはここまで
+		move_child(_dialogue, -1)
+		await _dialogue.show_key("DEMO_END")
+		get_tree().change_scene_to_file("res://scenes/title.tscn")
+		return
+	# 次の章へそのまま続く(部屋の絵は GameState.changed で章の差分に切り替わる)
+	t = create_tween()
+	t.tween_property(card, "color:a", 0.0, 1.2)
+	t.parallel().tween_property(label, "modulate:a", 0.0, 0.6)
+	await t.finished
+	card.queue_free()
+	await run_actions(next)
 
 
 func _to_title() -> void:

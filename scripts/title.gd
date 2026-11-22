@@ -33,7 +33,11 @@ func _ready() -> void:
 	vb.position = Vector2(190, 480)
 	vb.add_theme_constant_override("separation", 20)
 	add_child(vb)
-	for id in ["new", "continue", "language", "quit"]:
+	var ids := ["new", "continue", "language", "quit"]
+	# エディタやデバッグ書き出しのときだけ、第2章へ飛ぶ確認用ボタンを出す
+	if OS.is_debug_build():
+		ids.insert(2, "debug_ch2")
+	for id in ids:
 		var b := Button.new()
 		b.name = id
 		b.custom_minimum_size = Vector2(440, 84)
@@ -60,6 +64,8 @@ func _refresh() -> void:
 	_buttons["continue"].disabled = not GameState.has_save()
 	_buttons["language"].text = tr("UI_LANGUAGE")
 	_buttons["quit"].text = tr("UI_QUIT")
+	if _buttons.has("debug_ch2"):
+		_buttons["debug_ch2"].text = tr("UI_DEBUG_CH2")
 
 
 func _on_button(id: String) -> void:
@@ -67,6 +73,10 @@ func _on_button(id: String) -> void:
 		"new":
 			GameState.delete_save()
 			GameState.new_game()
+			get_tree().change_scene_to_file("res://scenes/main.tscn")
+		"debug_ch2":
+			GameState.debug_start_chapter(2)
+			GameState.set_meta("pending_start", Story.CHAPTER_START.get(2, []))
 			get_tree().change_scene_to_file("res://scenes/main.tscn")
 		"continue":
 			if GameState.load_game():

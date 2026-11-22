@@ -4,6 +4,8 @@ extends Control
 ## テキスト中の "|" でページを区切る。
 
 signal advanced
+## 会話ウィンドウが開いた / 閉じた(部屋のモコを隠すのに使う)
+signal active_changed(active: bool)
 
 const SPEAKER_KEYS := {"moko": "SPEAKER_MOKO", "poppo": "SPEAKER_POPPO"}
 ## 話し手の立ち絵(会話ウィンドウの右上に出す)
@@ -82,7 +84,9 @@ func show_text(text: String, speaker: String = "") -> void:
 	if _portrait.visible:
 		_portrait.texture = load(PORTRAITS[speaker])
 	visible = true
-	_active = true
+	if not _active:
+		_active = true
+		active_changed.emit(true)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	for page in text.split("|"):
 		_text.text = page.strip_edges()
@@ -95,6 +99,7 @@ func show_text(text: String, speaker: String = "") -> void:
 	_active = false
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	active_changed.emit(false)
 
 
 func is_active() -> bool:
