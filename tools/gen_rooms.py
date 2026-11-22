@@ -27,6 +27,7 @@ ROOMS = {
         "name_key": "ROOM_LIVING",
         "floor": "Color(0.8, 0.66, 0.52, 1)",
         "moko": (300, 660, 620, 980),
+        "backgrounds": ["res://assets/rooms/living_room_ch1.png"],
         "spots": [
             ("DoorKitchen", "living_to_kitchen", "LBL_TO_KITCHEN", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Clock", "living_clock", "LBL_CLOCK", (260, 240, 520, 600), "Color(0.62, 0.42, 0.28, 1)", "rect"),
@@ -40,6 +41,7 @@ ROOMS = {
         "name_key": "ROOM_KIDS",
         "floor": "Color(0.88, 0.78, 0.62, 1)",
         "moko": (700, 700, 1000, 980),
+        "backgrounds": ["res://assets/rooms/kids_room_ch1.png"],
         "spots": [
             ("DoorLiving", "kids_to_living", "LBL_TO_LIVING", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
             ("Shelf", "kids_shelf", "LBL_SHELF", (300, 250, 700, 780), "Color(0.7, 0.5, 0.34, 1)", "rect"),
