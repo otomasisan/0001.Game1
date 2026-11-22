@@ -40,6 +40,8 @@ func _ready() -> void:
 	_panel.position = Vector2(160, 760)
 	_panel.custom_minimum_size = Vector2(1600, 260)
 	_panel.size = _panel.custom_minimum_size
+	# パネルがクリックを横取りしないように(ウィンドウの上をクリックしても次へ進む)
+	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_panel)
 
 	_portrait = TextureRect.new()

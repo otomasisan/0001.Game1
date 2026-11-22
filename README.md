@@ -81,7 +81,11 @@ tools/            部屋シーンとテキスト CSV の生成スクリプト
 ```
 godot --headless --path . --import
 godot --headless --path . res://tests/smoke_test.tscn
+xvfb-run -a godot --path . --rendering-driver opengl3 --resolution 1920x1080 res://tests/click_test.tscn
 ```
+
+`click_test` は本物のマウスクリック(画面の座標)でタイトル → 第1章 → タイトル → 第2章と遊び、
+会話ウィンドウの送り・クリック場所・「タイトルへ」が効くかを確かめる(画面が要るので xvfb で動かす)。
 
 第1章と第2章を最初から最後まで自動で遊び、テキストの日英の抜けも確認する。GitHub Actions でも PR ごとに実行。
 画面つきで `-- --shots=<フォルダ>` を付けると要所のスクリーンショットを保存する。
