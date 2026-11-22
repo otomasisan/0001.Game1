@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!-- ひつじのおるすばん / モコ(立ち絵・左向き) 絵柄お試し版 -->
+  <defs>
+    <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.9"/>
+    </filter>
+    <radialGradient id="wool" cx="0.45" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1E8DA"/>
+    </radialGradient>
+  </defs>
+  <!-- かげ -->
+  <ellipse cx="205" cy="372" rx="130" ry="16" fill="#5A4636" opacity="0.15"/>
+  <!-- あし -->
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linecap="round">
+    <path d="M128 300 v62" stroke-width="22"/><path d="M168 310 v56" stroke-width="22"/>
+    <path d="M238 310 v56" stroke-width="22"/><path d="M278 300 v62" stroke-width="22"/>
+  </g>
+  <!-- もこもこの体(線の円の上に一回り小さい塗りの円を重ねて、外側の輪郭だけ残す) -->
+  <g filter="url(#wobble)">
+    <g fill="#5A4636"><circle cx="120" cy="236" r="58"/><circle cx="150" cy="176" r="58"/><circle cx="214" cy="150" r="62"/><circle cx="282" cy="180" r="58"/><circle cx="316" cy="246" r="52"/><circle cx="268" cy="300" r="56"/><circle cx="196" cy="312" r="58"/><circle cx="130" cy="292" r="54"/><circle cx="210" cy="236" r="80"/></g>
+    <g fill="url(#wool)"><circle cx="120" cy="236" r="53"/><circle cx="150" cy="176" r="53"/><circle cx="214" cy="150" r="57"/><circle cx="282" cy="180" r="53"/><circle cx="316" cy="246" r="47"/><circle cx="268" cy="300" r="51"/><circle cx="196" cy="312" r="53"/><circle cx="130" cy="292" r="49"/><circle cx="210" cy="236" r="75"/></g>
+    <g fill="none" stroke="#5A4636" stroke-width="3" stroke-linecap="round" opacity="0.35">
+      <path d="M196 160 q16 -10 30 0"/><path d="M272 236 q14 -10 28 0"/><path d="M214 300 q14 -10 28 0"/><path d="M286 176 q10 -12 24 -4"/>
+    </g>
+  </g>
+  <!-- しっぽ -->
+  <g filter="url(#wobble)"><circle cx="364" cy="230" r="16" fill="#FFFFFF" stroke="#5A4636" stroke-width="5"/></g>
+  <!-- 顔 -->
+  <g filter="url(#wobble)" stroke="#5A4636" stroke-width="5" stroke-linejoin="round">
+    <ellipse cx="62" cy="150" rx="30" ry="16" fill="#6E5848" transform="rotate(-28 62 150)"/>
+    <ellipse cx="164" cy="150" rx="30" ry="16" fill="#6E5848" transform="rotate(28 164 150)"/>
+    <ellipse cx="62" cy="152" rx="16" ry="7" fill="#F2A9B0" stroke="none" transform="rotate(-28 62 152)"/>
+    <ellipse cx="164" cy="152" rx="16" ry="7" fill="#F2A9B0" stroke="none" transform="rotate(28 164 152)"/>
+    <ellipse cx="112" cy="182" rx="54" ry="64" fill="#6E5848"/>
+    <!-- 頭の上のもこもこ -->
+    <g fill="#FFFFFF"><circle cx="90" cy="126" r="20"/><circle cx="114" cy="116" r="22"/><circle cx="138" cy="128" r="19"/></g>
+  </g>
+  <g>
+    <ellipse cx="92" cy="186" rx="7" ry="9" fill="#FFFFFF"/><ellipse cx="132" cy="186" rx="7" ry="9" fill="#FFFFFF"/>
+    <circle cx="94" cy="183" r="2.6" fill="#5A4636"/><circle cx="134" cy="183" r="2.6" fill="#5A4636"/>
+    <ellipse cx="80" cy="214" rx="11" ry="7" fill="#F2A9B0" opacity="0.8"/><ellipse cx="146" cy="214" rx="11" ry="7" fill="#F2A9B0" opacity="0.8"/>
+    <path d="M104 222 q8 7 16 0" fill="none" stroke="#F4E3D3" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

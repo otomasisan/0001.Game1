@@ -3,6 +3,9 @@ class_name Moko
 extends Control
 ## 主人公モコの仮の姿(丸いシルエットに点の目)。ゆっくり上下にゆれる。
 
+## 立ち絵。設定されていれば仮の図形の代わりに描く
+@export var texture: Texture2D
+
 var _t := 0.0
 
 
@@ -16,6 +19,13 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
+	if texture:
+		# 息をしているように、ほんの少し伸び縮みさせる
+		var s := 1.0 + sin(_t * 2.0) * 0.012
+		var fit := minf(size.x / texture.get_width(), size.y / texture.get_height())
+		var tsz := Vector2(texture.get_width(), texture.get_height()) * fit * Vector2(1.0 / s, s)
+		draw_texture_rect(texture, Rect2(Vector2((size.x - tsz.x) * 0.5, size.y - tsz.y), tsz), false)
+		return
 	var line := Color(0.35, 0.27, 0.2)
 	var wool := Color(1, 1, 1)
 	var c := size * 0.5 + Vector2(0, sin(_t * 2.0) * 4.0)

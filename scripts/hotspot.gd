@@ -24,6 +24,12 @@ enum Shape { RECT, ELLIPSE, DOOR }
 @export var draw_placeholder: bool = true
 @export var label_size: int = 30
 
+## 部屋に背景の絵があるとき true(Room が設定する)。仮の図形は描かず、なぞったときだけ光らせる
+var art_mode := false:
+	set(v):
+		art_mode = v
+		queue_redraw()
+
 var _hover := false
 
 
@@ -55,6 +61,9 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
+	if art_mode:
+		_draw_art_hover()
+		return
 	if not draw_placeholder:
 		return
 	var col := fill_color.lightened(0.15) if _hover else fill_color
@@ -93,3 +102,28 @@ func _draw() -> void:
 		var pos := Vector2((size.x - ts.x) * 0.5, size.y * 0.5 + ts.y * 0.3)
 		draw_string_outline(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, label_size, 8, Color(1, 1, 1, 0.85))
 		draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, label_size, line)
+
+
+func _draw_art_hover() -> void:
+	if not _hover or hotspot_id.is_empty():
+		return
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(1, 0.98, 0.9, 0.18)
+	sb.border_color = Color(1, 0.97, 0.86, 0.95)
+	sb.set_border_width_all(5)
+	sb.set_corner_radius_all(22)
+	draw_style_box(sb, Rect2(Vector2(-6, -6), size + Vector2(12, 12)))
+	if label_key.is_empty():
+		return
+	# 名前の札
+	var font := get_theme_default_font()
+	var text := tr(label_key)
+	var ts := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, label_size)
+	var tag := Rect2(Vector2((size.x - ts.x) * 0.5 - 18, size.y * 0.5 - ts.y * 0.5 - 10), ts + Vector2(36, 20))
+	var tsb := StyleBoxFlat.new()
+	tsb.bg_color = Color(1, 0.98, 0.93, 0.95)
+	tsb.border_color = Color(0.35, 0.27, 0.2)
+	tsb.set_border_width_all(3)
+	tsb.set_corner_radius_all(int(tag.size.y * 0.5))
+	draw_style_box(tsb, tag)
+	draw_string(font, tag.position + Vector2(18, 10 + ts.y * 0.78), text, HORIZONTAL_ALIGNMENT_LEFT, -1, label_size, Color(0.35, 0.27, 0.2))

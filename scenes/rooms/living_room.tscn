@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/moko.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/characters/moko.png" id="4"]
 
 [node name="LivingRoom" type="Control"]
 layout_mode = 3
@@ -95,3 +96,4 @@ offset_top = 660.0
 offset_right = 620.0
 offset_bottom = 980.0
 script = ExtResource("3")
+texture = ExtResource("4")

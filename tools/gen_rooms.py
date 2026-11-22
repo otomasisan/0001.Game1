@@ -12,6 +12,7 @@ ROOMS = {
         "name_key": "ROOM_KITCHEN",
         "floor": "Color(0.86, 0.72, 0.55, 1)",
         "moko": (200, 640, 520, 960),
+        "backgrounds": ["res://assets/rooms/kitchen_ch1.png"],
         "spots": [
             ("Window", "kitchen_window", "LBL_WINDOW", (140, 260, 500, 580), "Color(0.72, 0.87, 0.96, 1)", "rect"),
             ("Fridge", "", "", (600, 240, 860, 780), "Color(0.95, 0.95, 0.93, 1)", "rect"),
@@ -62,12 +63,27 @@ def node(name, l, t, r, b, extra):
     return "\n".join(lines + extra) + "\n"
 
 
+MOKO_TEXTURE = "res://assets/characters/moko.png"
+
+
 def build(room_id, d):
-    out = [
-        "[gd_scene load_steps=4 format=3]\n",
+    bgs = d.get("backgrounds", [])
+    res = [
         '[ext_resource type="Script" path="res://scripts/room.gd" id="1"]',
         '[ext_resource type="Script" path="res://scripts/hotspot.gd" id="2"]',
-        '[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]\n',
+        '[ext_resource type="Script" path="res://scripts/moko.gd" id="3"]',
+        f'[ext_resource type="Texture2D" path="{MOKO_TEXTURE}" id="4"]',
+    ]
+    for i, bg in enumerate(bgs):
+        res.append(f'[ext_resource type="Texture2D" path="{bg}" id="bg{i + 1}"]')
+    bg_line = []
+    if bgs:
+        refs = ", ".join(f'ExtResource("bg{i + 1}")' for i in range(len(bgs)))
+        bg_line = [f"backgrounds = Array[Texture2D]([{refs}])"]
+    out = [
+        f"[gd_scene load_steps={len(res) + 1} format=3]\n",
+        *res,
+        "",
         f'[node name="{"".join(p.capitalize() for p in room_id.split("_"))}" type="Control"]',
         "layout_mode = 3",
         "anchors_preset = 15",
@@ -79,7 +95,9 @@ def build(room_id, d):
         f'room_id = "{room_id}"',
         f'name_key = "{d["name_key"]}"',
         f"wall_colors = Array[Color]({WALLS})",
-        f"floor_color = {d['floor']}\n",
+        f"floor_color = {d['floor']}",
+        *bg_line,
+        "",
     ]
     text = "\n".join(out) + "\n"
     for name, hid, label, (l, t, r, b), color, shape in d["spots"]:
@@ -95,7 +113,7 @@ def build(room_id, d):
             extra.append("label_size = 24")
         text += "\n" + node(name, l, t, r, b, extra)
     l, t, r, b = d["moko"]
-    text += "\n" + node("Moko", l, t, r, b, ['script = ExtResource("3")'])
+    text += "\n" + node("Moko", l, t, r, b, ['script = ExtResource("3")', 'texture = ExtResource("4")'])
     return text
 
 
