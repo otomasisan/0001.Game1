@@ -6,6 +6,12 @@ extends Control
 signal advanced
 
 const SPEAKER_KEYS := {"moko": "SPEAKER_MOKO", "poppo": "SPEAKER_POPPO"}
+## 話し手の立ち絵(会話ウィンドウの右上に出す)
+const PORTRAITS := {
+	"moko": "res://assets/characters/moko.png",
+	"poppo": "res://assets/characters/poppo.png",
+}
+const PORTRAIT_SIZE := Vector2(260, 260)
 const CHARS_PER_SEC := 40.0
 
 var _panel: PanelContainer
@@ -13,6 +19,7 @@ var _name_label: Label
 var _text: Label
 var _tween: Tween
 var _active := false
+var _portrait: TextureRect
 
 
 func _ready() -> void:
@@ -32,6 +39,17 @@ func _ready() -> void:
 	_panel.custom_minimum_size = Vector2(1600, 260)
 	_panel.size = _panel.custom_minimum_size
 	add_child(_panel)
+
+	_portrait = TextureRect.new()
+	_portrait.name = "Portrait"
+	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_portrait.size = PORTRAIT_SIZE
+	# 会話ウィンドウの右上に、ふちに腰かけるように置く(本文と重ならない位置)
+	_portrait.position = Vector2(1480, 760 - PORTRAIT_SIZE.y + 30)
+	_portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_portrait.visible = false
+	add_child(_portrait)
 
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 12)
@@ -60,6 +78,9 @@ func show_key(key: String, speaker: String = "", fmt: Dictionary = {}) -> void:
 func show_text(text: String, speaker: String = "") -> void:
 	_name_label.text = tr(SPEAKER_KEYS[speaker]) if SPEAKER_KEYS.has(speaker) else ""
 	_name_label.visible = not _name_label.text.is_empty()
+	_portrait.visible = PORTRAITS.has(speaker)
+	if _portrait.visible:
+		_portrait.texture = load(PORTRAITS[speaker])
 	visible = true
 	_active = true
 	mouse_filter = Control.MOUSE_FILTER_STOP

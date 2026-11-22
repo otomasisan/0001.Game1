@@ -50,6 +50,22 @@ ROOMS = {
             ("Bed", "kids_bed", "LBL_BED", (1100, 640, 1800, 900), "Color(0.75, 0.85, 0.7, 1)", "rect"),
         ],
     },
+    # 第2章から入れる部屋(まだ入口はつないでいない)
+    "brother_room": {
+        "name_key": "ROOM_BROTHER",
+        "floor": "Color(0.77, 0.59, 0.44, 1)",
+        "moko": (640, 700, 940, 980),
+        "backgrounds": [None, "res://assets/rooms/brother_room_ch2.png"],
+        "spots": [
+            ("DoorLiving", "brother_to_living", "LBL_TO_LIVING", (10, 380, 160, 780), "Color(0.9, 0.78, 0.62, 1)", "door"),
+            ("Pillar", "brother_pillar", "LBL_PILLAR", (260, 120, 380, 780), "Color(0.78, 0.58, 0.42, 1)", "rect"),
+            ("Desk", "brother_desk", "LBL_DESK", (480, 500, 900, 780), "Color(0.72, 0.52, 0.36, 1)", "rect"),
+            ("Window", "brother_window", "LBL_WINDOW", (1000, 200, 1360, 540), "Color(0.97, 0.75, 0.6, 1)", "rect"),
+            ("Kite", "brother_kite", "LBL_KITE", (1480, 200, 1720, 440), "Color(0.97, 0.87, 0.55, 1)", "rect"),
+            ("GiftBox", "brother_gift", "LBL_GIFT_BOX", (1000, 640, 1180, 780), "Color(0.96, 0.9, 0.79, 1)", "rect"),
+            ("Bed", "brother_bed", "LBL_BED", (1300, 620, 1860, 900), "Color(0.48, 0.61, 0.78, 1)", "rect"),
+        ],
+    },
 }
 
 
@@ -77,10 +93,11 @@ def build(room_id, d):
         f'[ext_resource type="Texture2D" path="{MOKO_TEXTURE}" id="4"]',
     ]
     for i, bg in enumerate(bgs):
-        res.append(f'[ext_resource type="Texture2D" path="{bg}" id="bg{i + 1}"]')
+        if bg:
+            res.append(f'[ext_resource type="Texture2D" path="{bg}" id="bg{i + 1}"]')
     bg_line = []
     if bgs:
-        refs = ", ".join(f'ExtResource("bg{i + 1}")' for i in range(len(bgs)))
+        refs = ", ".join(f'ExtResource("bg{i + 1}")' if bg else "null" for i, bg in enumerate(bgs))
         bg_line = [f"backgrounds = Array[Texture2D]([{refs}])"]
     out = [
         f"[gd_scene load_steps={len(res) + 1} format=3]\n",
